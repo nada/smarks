@@ -1,0 +1,16 @@
+/* CSS declarations go here */
+
+.timeline {
+	border:1px solid red;
+}
+
+.timeline .avatar {
+	font-size:11px;
+	margin:7px 0px;
+	line-height:12px;
+}
+
+.timeline .smark {
+	margin:5px 0px;
+	background:#eeeeee;
+}

@@ -1,0 +1,67 @@
+<head>
+  <title>smarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  {{> page}}
+</body>
+
+<template name="page">
+
+  <div class="container">
+
+
+
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span5">
+        <h3>smarks!</h3>
+      </div>
+      <div class="span5">
+        <div style="float: right">
+          {{loginButtons align="right"}}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span10">
+        {{#if currentUser}}
+        <input type="text" id="new-smark" />
+        {{else}}
+        Not logged in
+        {{/if}}
+      </div>
+    </div>
+    
+
+    <div class="row">
+      <div class="span1"></div>
+      <div class="span7">
+        {{> timeline }}
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<template name="timeline">
+  <div class="timeline">
+    {{#each posts}}
+      {{> post}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="post">
+  <div class="span7">
+    <div class="span1 avatar">{{ avatar }}</div>
+    <div class="span1"></div>
+    <div class="span5 smark">
+      <span class="text">{{ smark }}</span>
+    </div>
+  </div>
+</template>
+
