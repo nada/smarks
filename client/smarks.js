@@ -65,9 +65,9 @@ var linkify = function(text) {
 }
 
 Template.page.rendered = function () {
-  $('.smark').each(function(){
+  $('.smark').not('.linkified').each(function(){
 	$(this).html(linkify($(this).text()));
-  });
+  }).addClass("linkified");
   $('div.smark').not('.embedlied').embedly({
 	maxWidth: '300px',
 	maxHeight: '200px',
@@ -76,36 +76,9 @@ Template.page.rendered = function () {
 	chars: 100,
 	className : "embedly span5 offset2",
 	key: 'f8fe34981bf2459e850c443dd1e587b7'
-  }).addClass("embedlied");
-}
-
-
-/*
-var filterURLsFrom = function (smarktext)
-{
-  var urlRegEx = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/gi;
-  var res = smarktext.search(urlRegEx);
-  res = "hello";
-  return res;
-};
-*/
-
-/* embedly */
-/*
-Template.post.rendered = function () {
-  //var res = filterURLsFrom(this.smark);
-  console.log(res);
-  
-  $('div.smark').embedly({
-	maxWidth: '300px',
-	maxHeight: '200px',
-	wmode: 'transparent',
-	method: 'after',
-	chars: 100,
-	key: 'f8fe34981bf2459e850c443dd1e587b7'
   });
-
+  //do this after the loop to lock the smarks from embedlying
+  $('div.smark').not('.embedlied').addClass("embedlied");
 }
-*/
 
 

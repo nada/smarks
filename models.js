@@ -22,7 +22,7 @@ Smarks.allow({
   fetch: ['owner']
 });
 
-/*
+
 Smarks.deny({
   update: function (userId, docs, fields, modifier) {
     // can't change owners
@@ -36,4 +36,3 @@ Smarks.deny({
   },
   fetch: ['locked'] // no need to fetch 'owner'
 });
-*/
