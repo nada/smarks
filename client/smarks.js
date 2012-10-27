@@ -62,6 +62,12 @@ var repositionPosts = function(event) {
 	$(".page").css('height', ($('.timeline').position().top + max + 60) + "px");
 }
 
+var updateTitle = function()
+{
+	if(newPosts) $('title').text('smarks! ['+newPosts+']');
+	else $('title').text('smarks!');
+}
+
 // ----------------main
 
 Meteor.startup(function () {
@@ -69,10 +75,28 @@ Meteor.startup(function () {
 	$(window).resize(repositionPosts);
 });
 
-
+var numOfPosts = 0;
+var firstRun = true;
+var newPosts = 0;
 Template.timeline.posts = function() {
-	return Smarks.find({}, {sort: {timestamp:-1}}); 
+	var res = Smarks.find({}, {sort: {timestamp:-1}}); 
+	if(firstRun)
+	{
+		numOfPosts = res.count();
+		firstRun = false;
+	}
+	newPosts = res.count() - numOfPosts;
+	updateTitle();
+	return res;
 };
+
+Template.post.events({
+  	'mouseenter': function (event) { 
+  		numOfPosts += newPosts;
+  		newPosts = 0;
+  		updateTitle();
+  	}
+});
 
 Template.post.helpers({
   formatdate: function (object) {
@@ -111,6 +135,8 @@ Template.page.events(okCancelEvents(
 		  owner: Meteor.userId(),
 		  timestamp:new Date().getTime()
 		});
+		numOfPosts += 1;
+		newPosts = 0;
 
 		evt.target.value = '';
 	  }
@@ -130,7 +156,6 @@ Template.page.rendered = function () {
 	$('.smark .inner').not('.linkified').each(function(){
 		var res = linkify($(this).text());
 		$(this).html(res.text);
-		console.log(res.text);
 		if(res.urls != null)
 		{
 			var node = this;
