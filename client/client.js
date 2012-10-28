@@ -48,7 +48,7 @@ var sJS = (function ($) {
 			postRowPointer[i] = 0;
 		}
 		//loop through posts and reposition em.
-		$('.timeline .box.smark').each(function(){
+		$('.timeline .box.smark:visible').each(function(){
 			//get the lowest rowpointer
 			var min = Math.min.apply(Math, postRowPointer);
 			//get fist appearence of min
@@ -66,6 +66,8 @@ var sJS = (function ($) {
 		var max = Math.max.apply(Math, postRowPointer);
 		$(".page").css('height', ($('.timeline').position().top + max + 60) + "px");
 		
+		//fav-only button
+		$('.btn.fav-only').css('left', ((postCols * (BOX_WIDTH + BOX_OFFSET)) + BOX_OFFSET - (2 * $('.btn.fav-only').width())) + "px").show();
 	};
 
 	resetNewPostsBadge = function(increment)
@@ -128,6 +130,21 @@ Template.timeline.rendered = function() {
 	for(var d in favDocs) {
 		$('.box.smark[data-id='+favDocs[d].postId+']').addClass("favourite");
 	};
+
+	$('.btn.fav-only').click(function() {
+		if($(this).hasClass('btn-primary')) {
+			$(this).removeClass('btn-primary');
+			$('.box.smark').fadeIn(function(){
+				repositionPosts();
+			});
+		}
+		else {
+			$(this).addClass('btn-primary');
+			$('.box.smark').not('.favourite').fadeOut(function(){
+				repositionPosts();
+			});
+		}
+	});
 }
 
 Template.post.rendered = function () {

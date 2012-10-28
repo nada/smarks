@@ -64,10 +64,10 @@
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "client/smarks.html",
 			"settings":
 			{
-				"buffer_size": 1152,
+				"buffer_size": 1793,
 				"line_ending": "Unix"
 			}
 		}
@@ -104,6 +104,7 @@
 	},
 	"file_history":
 	[
+		"/Users/nada/dev/meteor/smarks/README.md",
 		"/Users/nada/dev/meteor/smarks/client/smarks.html",
 		"/Users/nada/dev/meteor/smarks/models.js",
 		"/Users/nada/dev/meteor/smarks/server/server.js",
@@ -176,17 +177,18 @@
 						"selection":
 						[
 							[
-								6669,
-								6669
+								5823,
+								5823
 							]
 						],
 						"settings":
 						{
 							"auto_name": "",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3267.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -214,31 +216,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1632.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "README.md",
+					"file": "client/smarks.html",
 					"settings":
 					{
-						"buffer_size": 1152,
+						"buffer_size": 1793,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1152,
-								1152
+								176,
+								176
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

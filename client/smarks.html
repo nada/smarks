@@ -26,7 +26,7 @@
 
     <div class="row-fluid smark-input-row">
       <div class="span1"></div>
-      <div class="span10">
+      <div class="span6">
         {{#if currentUser}}
         <textarea rows="1" id="new-smark"></textarea>
         {{else}}
@@ -38,6 +38,7 @@
     <div class="row-fluid">
       <div class="span1"></div>
       <div class="span10 timeline">
+        <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
         {{> timeline }}
       </div>
     </div>

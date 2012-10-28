@@ -12,6 +12,15 @@
 
 
 /* ------------------------------------------------ */
+/* bootstrap overrides */
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: #968249;
+    background-image: none;
+}
+/* ------------------------------------------------ */
 
 body {
     background-color:#f4f4f4;
@@ -37,6 +46,14 @@ body {
     position:relative;
 }
 
+.fav-only
+{
+    position:absolute;
+    left:0px;
+    top:-35px;
+    display:hidden;
+}
+
 .box {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #EDEDED;
@@ -46,12 +63,12 @@ body {
     position:absolute;
     font-family: Georgia;
     font-size:14px;
-    /*
+    
     -webkit-transition: all 0.3s ease-out;  
      -moz-transition: all 0.3s ease-out;  
        -o-transition: all 0.3s ease-out;  
           transition: all 0.3s ease-out;  
-          */
+          
 }
 
 .box.favourite
