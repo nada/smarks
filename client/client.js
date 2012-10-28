@@ -152,6 +152,9 @@ Template.post.helpers({
   		else str += mm + " minutes ago";
   	}
     return str;
+  },
+  isOwnerOfPost:function(postObject) {
+  	return postObject.owner === Meteor.userId();
   }
 });
 

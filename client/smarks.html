@@ -60,7 +60,13 @@
 <template name="post">
   <div class="box smark">
     <div class="inner">{{ smark }}</div>
-    <div class="footer clearfix"><span class="avatar">{{ avatar }}</span><span class="time">{{ formatdate timestamp }}</span></div>
+    <div class="footer clearfix">
+      <div class="avatar">{{ avatar }}</div>
+      <div class="util clearfix">
+        <div class="time">{{ formatdate timestamp }}</div>
+        <div class="useredit">{{#if isOwnerOfPost this}}<i class="icon-trash icons"></i>{{/if}}<i class="icon-heart icons"></i></div>
+      </div>
+    </div>
   </div>
 </template>
 
