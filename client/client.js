@@ -112,6 +112,7 @@ var sJS = (function ($) {
 
 Meteor.startup(function () {
 	Meteor.subscribe("smarks");
+	Meteor.subscribe("favs");
 	$(window).resize(sJS.repositionPosts);
 });
 
@@ -122,9 +123,17 @@ Template.timeline.posts = function() {
 	return res;
 };
 
+Template.timeline.rendered = function() {
+	var favDocs = Favs.find({owner:Meteor.userId()}).fetch();
+	for(var d in favDocs) {
+		$('.box.smark[data-id='+favDocs[d].postId+']').addClass("favourite");
+	};
+}
+
 Template.post.rendered = function () {
 	//wire up trash and fav icon
 	var postId = this.data._id;
+	$(this.firstNode).attr("data-id", postId);
 	if(this.data.owner !== Meteor.userId())
 	{
 		$(this.find('i.icon-trash')).css('display', 'none');
@@ -133,11 +142,27 @@ Template.post.rendered = function () {
 	{
 		$(this.find('i.icon-trash')).unbind('click').click(function(){
 			Smarks.remove({_id:postId});
+			Favs.remove({postId:postId});
 		});
 	}
 
 	$(this.find('i.icon-heart')).unbind('click').click(function(){
-		console.log("add to favs " + postId);
+		//toggle favs
+		if($(this).parents('.box.smark').hasClass('favourite'))
+		{
+			//remove fav marker
+			Favs.remove({postId:postId, owner:Meteor.userId()});
+			$(this).parents('.box.smark').removeClass('favourite');
+		}	
+		else
+		{
+			//mark fav
+			Favs.insert({
+		  		owner: Meteor.userId(),
+		  		postId: postId
+			});
+			$(this).parents('.box.smark').addClass('favourite');
+		}
 	});
 }
 

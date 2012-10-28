@@ -15,3 +15,7 @@ Meteor.startup(function () {
 Meteor.publish("smarks", function () {
   return Smarks.find({}, {sort: {timestamp: -1}});
 });
+
+Meteor.publish("favs", function() {
+    return Favs.find({});
+})

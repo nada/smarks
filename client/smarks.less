@@ -7,6 +7,8 @@
 //FOOTER
 @footerHeight:		20px;
 
+@favouriteColor:    #968249;
+
 
 
 /* ------------------------------------------------ */
@@ -50,6 +52,11 @@ body {
        -o-transition: all 0.3s ease-out;  
           transition: all 0.3s ease-out;  
           */
+}
+
+.box.favourite
+{
+    border:1px solid @favouriteColor;
 }
 
 .box a {
@@ -100,19 +107,17 @@ body {
 .box .footer .util .time
 {
     display:block;
-    float:right;
 }
 
 .box .footer:hover .util .time
 {
     display:none;
-    float:right;
 }
 
 .box .footer .util .useredit
 {
     display:none;
-
+    float:right;
 }
 
 .box .footer:hover .util .useredit
@@ -122,6 +127,7 @@ body {
 
 .box .footer .icons {
     opacity: 0.6;
+    cursor:pointer;
 }
 
 .box .footer .icons:hover {
@@ -132,6 +138,13 @@ body {
 {
     margin-left:15px;
 }
+
+.box.favourite .footer .icon-heart
+{
+    opacity: 1.0;
+}
+
+
 
 .footer-row
 {
