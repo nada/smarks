@@ -1,0 +1,115 @@
+//BOX
+@boxWidth:          300px;
+@boxPadding:		20px;
+@boxOffset:          10px;
+@boxFooterHeight:	25px;
+
+//FOOTER
+@footerHeight:		25px;
+
+
+
+/* ------------------------------------------------ */
+
+body {
+    background-color:#f4f4f4;
+}
+
+.container-fluid
+{
+    padding:0px;
+}
+
+#new-smark
+{
+    width:425px;
+}
+
+.main-container
+{
+    margin-bottom:40px;
+}
+
+
+.timeline {
+    position:relative;
+}
+
+.box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #EDEDED;
+    display: block;
+    margin-bottom: 10px;
+    width: @boxWidth;
+    position:absolute;
+    font-family: Georgia;
+    font-size:14px;
+}
+
+.box a {
+	display:block;
+}
+
+.box .inner {
+    cursor: pointer;
+    padding: @boxPadding;
+    width: (@boxWidth - 2 * @boxPadding);
+    color: #000000;
+    font-size: 14px;
+    line-height: 135%;
+}
+
+.box .embedly
+{
+	margin:10px 0px 0px 0px;
+}
+
+.box .embedly a:first-child {
+	display:none;
+}
+
+.box .footer {
+    border-top: 1px solid #EDEDED;
+    height: @boxFooterHeight;
+    line-height: @boxFooterHeight;
+    padding: 5px @boxPadding;
+    position: relative;
+
+    color: #999999;
+    font-family: Arial;
+    font-size: 11px;
+}
+
+.box .footer .avatar
+{
+    float:left;
+}
+
+.box .footer .time
+{
+    float:right;
+}
+
+.footer-row
+{
+    background:#bbbbbb;
+    height:@;
+    padding-top:5px;
+    position:fixed;
+    bottom:0px;
+    width:100%;
+    
+}
+
+.footer-row,
+.footer-row a
+{
+    color:#333333;
+    text-decoration:none;
+}
+
+.footer-row a:hover
+{
+    color:#000000;
+}
+
