@@ -122,6 +122,26 @@ Template.timeline.posts = function() {
 	return res;
 };
 
+Template.post.rendered = function () {
+	//wire up trash and fav icon
+	var postId = this.data._id;
+	if(this.data.owner !== Meteor.userId())
+	{
+		$(this.find('i.icon-trash')).css('display', 'none');
+	}
+	else
+	{
+		$(this.find('i.icon-trash')).unbind('click').click(function(){
+			Smarks.remove({_id:postId});
+		});
+	}
+
+	$(this.find('i.icon-heart')).unbind('click').click(function(){
+		console.log("add to favs " + postId);
+	});
+
+}
+
 Template.post.events({
   	'mouseenter': function (event) { 
   		sJS.resetNewPostsBadge(0);
@@ -152,9 +172,6 @@ Template.post.helpers({
   		else str += mm + " minutes ago";
   	}
     return str;
-  },
-  isOwnerOfPost:function(postObject) {
-  	return postObject.owner === Meteor.userId();
   }
 });
 
