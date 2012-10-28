@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"user",
+				"userId"
+			],
+			[
+				"new",
+				"newPosts"
+			],
+			[
+				"ok",
+				"okCancelEvents"
+			],
+			[
 				"dbfl",
 				"DB_FLATS"
 			],
@@ -36,42 +48,26 @@
 	"buffers":
 	[
 		{
-			"file": "server/server.js",
+			"file": "client/client.js",
 			"settings":
 			{
-				"buffer_size": 336,
+				"buffer_size": 6733,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "client/smarks.html",
+			"file": "client/smarks.less",
 			"settings":
 			{
-				"buffer_size": 1201,
+				"buffer_size": 2298,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "client/smarks.js",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 1893,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/smarks.css",
-			"settings":
-			{
-				"buffer_size": 204,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "models.js",
-			"settings":
-			{
-				"buffer_size": 951,
+				"buffer_size": 1152,
 				"line_ending": "Unix"
 			}
 		}
@@ -79,15 +75,23 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"console",
+				"Set Syntax: R Console"
+			]
 		],
-		"width": 0.0
+		"width": 449.0
 	},
 	"console":
 	{
-		"height": 0.0
+		"height": 125.0
 	},
 	"distraction_free":
 	{
@@ -100,10 +104,13 @@
 	},
 	"file_history":
 	[
-		"/Users/nada/dev/meteor/smarks/server/server.js",
-		"/Users/nada/dev/meteor/smarks/models.js",
-		"/Users/nada/dev/meteor/smarks/client/smarks.js",
 		"/Users/nada/dev/meteor/smarks/client/smarks.html",
+		"/Users/nada/dev/meteor/smarks/models.js",
+		"/Users/nada/dev/meteor/smarks/server/server.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.less",
+		"/Users/nada/dev/meteor/smarks/client/variables.less",
+		"/Users/nada/dev/meteor/smarks/client/smarks.css",
 		"/Users/nada/dev/meteor/smarks/smarks.html",
 		"/Users/nada/dev/meteor/smarks/smarks.js",
 		"/Users/nada/dev/vizdev/workspace/wowowohnige2/HOWTO.txt",
@@ -132,6 +139,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"collection",
+			"favs",
+			"currentUser",
+			"updateTitle",
 			"codecs"
 		],
 		"highlight": true,
@@ -155,133 +166,79 @@
 			[
 				{
 					"buffer": 0,
-					"file": "server/server.js",
+					"file": "client/client.js",
 					"settings":
 					{
-						"buffer_size": 336,
+						"buffer_size": 6733,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								208,
-								208
+								6669,
+								6669
 							]
 						],
 						"settings":
 						{
+							"auto_name": "",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3267.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "client/smarks.html",
+					"file": "client/smarks.less",
 					"settings":
 					{
-						"buffer_size": 1201,
+						"buffer_size": 2298,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1012,
-								1012
+								1820,
+								1820
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 352.0,
+						"translation.y": 1632.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "client/smarks.js",
+					"file": "README.md",
 					"settings":
 					{
-						"buffer_size": 1893,
+						"buffer_size": 1152,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1667,
-								1667
+								1152,
+								1152
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 531.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "client/smarks.css",
-					"settings":
-					{
-						"buffer_size": 204,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								139,
-								139
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "models.js",
-					"settings":
-					{
-						"buffer_size": 951,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								537,
-								537
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

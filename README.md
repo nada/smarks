@@ -11,3 +11,7 @@
 	     \/__/         \/__/         \/__/         \/__/         \/__/         \/__/    
 
 ---------------------------------------------------------------------------------------------
+
+want to have your own smarks?
+fork smarks and get it on your own server!
+http://docs.meteor.com/#meteordeploy
