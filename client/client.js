@@ -139,7 +139,6 @@ Template.post.rendered = function () {
 	$(this.find('i.icon-heart')).unbind('click').click(function(){
 		console.log("add to favs " + postId);
 	});
-
 }
 
 Template.post.events({
