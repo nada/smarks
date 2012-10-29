@@ -3,9 +3,13 @@
 // ----------------main
 Smarks = new Meteor.Collection("smarks");
 Favs = new Meteor.Collection("favs");
+SuperU = new Meteor.Collection("superu");
+
 
 Meteor.subscribe("smarks");
 Meteor.subscribe("favs");
+Meteor.subscribe("superu");
+
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -179,6 +183,10 @@ Template.page.rendered = function () {
 
 Meteor.startup(function () {
 	$(window).resize(sJS.repositionPosts);
+
+	if (SuperU.find().count() === 0) {
+		console.log("no super user set until now!")
+	}
 });
 
 
