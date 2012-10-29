@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "/Users/nada/dev/meteor/smarks"
+		},
+		{
+			"path": "/Users/nada/dev/meteor/todos"
 		}
 	]
 }
