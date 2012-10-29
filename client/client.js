@@ -220,9 +220,13 @@ Template.page.events(sJS.okCancelEvents(
 	'#new-smark',
 	{
 	  ok: function (text, evt) {
+	  	var username;
+	  	if(Meteor.user().profile) username = Meteor.user().profile.name;
+	  	else if(Meteor.user().username) username = Meteor.user().username;
+	  	else username = "anonymous";
 
 		Smarks.insert({
-		  avatar: Meteor.user().profile.name,
+		  avatar: username,
 		  smark: text,
 		  owner: Meteor.userId(),
 		  timestamp:new Date().getTime()
