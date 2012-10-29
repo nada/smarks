@@ -17,12 +17,12 @@
 	  var events = {};
 	  events['keyup '+selector+', keydown '+selector+', focusout '+selector] =
 		function (evt) {
-		  if (evt.type === "keydown" && evt.which === 27) {
+		  if (evt.type === "keydown" && evt.which === 27 ||
+					 evt.type === "focusout") {
 			// escape = cancel
 			cancel.call(this, evt);
 
-		  } else if (evt.type === "keyup" && evt.which === 13 ||
-					 evt.type === "focusout") {
+		  } else if (evt.type === "keyup" && evt.which === 13) {
 			// blur/return/enter = ok/submit if non-empty
 			var value = String(evt.target.value || "");
 			if (value)
