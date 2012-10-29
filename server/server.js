@@ -5,7 +5,7 @@ Meteor.startup(function () {
     if (Smarks.find().count() === 0) {
         Smarks.insert({
         	avatar:"Admin",
-        	smark:"Hello World this is your post", 
+        	smark:"Hello Smarks", 
         	owner:"admin",
         	timestamp:new Date().getTime()
         });
