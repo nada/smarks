@@ -157,11 +157,11 @@ Template.page.rendered = function () {
 	   				switch(oembed.type)
 					{
 						case "photo":
-							$(node).append('<div class="embedly"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></div>');
+							$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a></div>');
 							break;
 						case "link":
 							if(oembed.thumbnail_url) {
-								$(node).append('<div class="embedly"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></div>'); 	
+								$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a></div>'); 	
 							}
 							break;
 						case "video":
