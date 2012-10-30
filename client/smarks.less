@@ -182,6 +182,8 @@ a:hover{
     height:@footerHeight;
     position:fixed;
     bottom:0px;
+    left:0px;
+    padding:0px 20px;
     width:100%;
     font-size:12px;
     
@@ -201,7 +203,28 @@ a:hover{
 
 .footer-row span
 {
-    margin-right:80px;
+    margin-right:5%;
+}
+
+@media (max-width: 767px) {
+  body {
+    padding:0px;
+  }
+  .container-fluid
+  {
+    margin:0px 10px;
+  }
+  #new-smark
+  {
+    max-width:@boxWidth - 12;
+  }
+  .row-fluid>.span1
+  {
+    display:none;
+  }
+  textarea { 
+    margin-bottom:44px;
+  }
 }
 
 
