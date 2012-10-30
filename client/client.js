@@ -53,17 +53,20 @@ Template.post.rendered = function () {
 	$(this.firstNode).attr("data-id", postId);
 	if(this.data.owner !== Meteor.userId())
 	{
-		$(this.find('i.icon-trash')).css('display', 'none');
+		$(this.find('i.icon-trash.interactive')).css('display', 'none');
 	}
 	else
 	{
-		$(this.find('i.icon-trash')).unbind('click').click(function(){
+		$(this.find('i.icon-trash.interactive')).unbind('click').click(function(){
 			Smarks.remove({_id:postId});
 			Favs.remove({postId:postId});
 		});
 	}
 
-	$(this.find('i.icon-heart')).unbind('click').click(function(){
+	console.log(this);
+	console.log($(this.find('i.icon-heart.interactive')));
+	$(this.find('i.icon-heart.interactive')).unbind('click').click(function(){
+		console.log(this);
 		//toggle favs
 		if($(this).parents('.box.smark').hasClass('favourite'))
 		{
@@ -113,6 +116,10 @@ Template.post.helpers({
   		else str += mm + " minutes ago";
   	}
     return str;
+  },
+  totalhearts: function() {
+  	var hearts = Favs.find({postId:this._id}).count();
+  	return hearts;
   }
 });
 
