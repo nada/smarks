@@ -133,14 +133,10 @@ Template.post.helpers({
   }
 });
 
-// TAG __________________________________________________
-/*
-Template.tag.tag_link = function(){
-	return this;
-};
-*/
+
 // PAGE _________________________________________________
 
+/*
 Template.page.adding_tag = function () {
   return Session.equals('editing_addtag', this._id);
 };
@@ -152,6 +148,7 @@ Template.page.events({
     sJS.activateInput(tmpl.find("#edittag-input"));
   }
 });
+*/
 
 Template.page.events(sJS.okCancelEvents(
 	'#new-smark',
@@ -195,6 +192,7 @@ Template.page.events(sJS.okCancelEvents(
 	})
 );
 
+/*
 Template.page.events(sJS.okCancelEvents(
   '#edittag-input',
   {
@@ -207,7 +205,7 @@ Template.page.events(sJS.okCancelEvents(
     }
   })
 );
-
+*/
 
 //on init page load, this runs 2 times, can't figure out why...
 Template.page.rendered = function () {
