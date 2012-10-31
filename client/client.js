@@ -91,14 +91,12 @@ Template.post.events({
 });
 
 Template.post.has_tags = function(){
-	console.log(this.tags);
 	return (this.tags.length > 0);
 };
 
 Template.post.tags = function(){
 	if(this.tags != null) return this.tags;
 	else return [];
-	//return this.tags;
 };
 
 Template.post.tag_link = function(){
