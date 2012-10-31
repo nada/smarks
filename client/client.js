@@ -63,10 +63,7 @@ Template.post.rendered = function () {
 		});
 	}
 
-	console.log(this);
-	console.log($(this.find('i.icon-heart.interactive')));
 	$(this.find('i.icon-heart.interactive')).unbind('click').click(function(){
-		console.log(this);
 		//toggle favs
 		if($(this).parents('.box.smark').hasClass('favourite'))
 		{
@@ -92,6 +89,21 @@ Template.post.events({
   		return false;
   	}
 });
+
+Template.post.has_tags = function(){
+	console.log(this.tags);
+	return (this.tags.length > 0);
+};
+
+Template.post.tags = function(){
+	if(this.tags != null) return this.tags;
+	else return [];
+	//return this.tags;
+};
+
+Template.post.tag_link = function(){
+	return this;
+};
 
 Template.post.helpers({
   formatdate: function (object) {
@@ -123,7 +135,25 @@ Template.post.helpers({
   }
 });
 
+// TAG __________________________________________________
+/*
+Template.tag.tag_link = function(){
+	return this;
+};
+*/
 // PAGE _________________________________________________
+
+Template.page.adding_tag = function () {
+  return Session.equals('editing_addtag', this._id);
+};
+
+Template.page.events({
+  'click .addtag': function (evt, tmpl) {
+    Session.set('editing_addtag', this._id);
+    Meteor.flush(); // update DOM before focus
+    sJS.activateInput(tmpl.find("#edittag-input"));
+  }
+});
 
 Template.page.events(sJS.okCancelEvents(
 	'#new-smark',
@@ -134,11 +164,31 @@ Template.page.events(sJS.okCancelEvents(
 	  	else if(Meteor.user().username) username = Meteor.user().username;
 	  	else username = "anonymous";
 
+	  	//trim additional whitespace
+	  	text = $.trim(text);
+
+	  	//extract tags from text
+	  	//strip em if they are at the end, else leave em, but collect em all
+	  	var regexp = new RegExp('#([^\\s]*)','g');
+	  	tags = text.match(regexp);
+	  	if(tags != null) 
+	  	{
+	  		for(var i=tags.length - 1; i >=  0; i--){
+	  			if((text.lastIndexOf(tags[i]) + tags[i].length) == text.length)
+	  			{
+	  				text = text.substring(0, text.lastIndexOf(tags[i])-1);
+	  				text = $.trim(text);
+	  			}
+	  		};
+	  		tags = _.map(tags, function(tag){return tag.substr(1)});
+	  	}
+
 		Smarks.insert({
 		  avatar: username,
 		  smark: text,
 		  owner: Meteor.userId(),
-		  timestamp:new Date().getTime()
+		  timestamp:new Date().getTime(),
+		  tags: tags ? tags : []
 		});
 		sJS.resetNewPostsBadge(1);
 
@@ -146,6 +196,20 @@ Template.page.events(sJS.okCancelEvents(
 	  }
 	})
 );
+
+Template.page.events(sJS.okCancelEvents(
+  '#edittag-input',
+  {
+    ok: function (value) {
+      //Todos.update(this._id, {$addToSet: {tags: value}});
+      Session.set('editing_addtag', null);
+    },
+    cancel: function () {
+      Session.set('editing_addtag', null);
+    }
+  })
+);
+
 
 //on init page load, this runs 2 times, can't figure out why...
 Template.page.rendered = function () {

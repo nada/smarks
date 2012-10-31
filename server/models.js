@@ -14,6 +14,7 @@ Smarks.allow({
     });
   },
   remove: function (userId, docs) {
+    return true;
     // can only remove your own documents
     return _.all(docs, function(doc) {
       return doc.owner === userId;

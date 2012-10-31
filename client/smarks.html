@@ -20,9 +20,9 @@
       <div class="span1"></div>
       <div class="span5">
         {{#if currentUser}}
-        <textarea id="new-smark" placeholder="smark your link!"></textarea>
+        <textarea id="new-smark" placeholder="smark me link / add tags with hashes!"></textarea>
         {{else}}
-        Not logged in
+        Your are definitely not logged in at all!
         {{/if}}
       </div>
     </div>
@@ -46,6 +46,18 @@
     <span class="vert-flag">beta</span>
   </div>
 
+  <!--
+  {{#if adding_tag}}
+        <div class="tag edittag">
+          <input type="text" id="edittag-input" value="" />
+        </div>
+        {{else}}
+        <div class="tag addtag">
+          +tag
+        </div>
+        {{/if}}
+      -->
+
 </template>
 
 <template name="timeline">
@@ -63,7 +75,9 @@
         <div class="time">{{ formatdate timestamp }}, {{ totalhearts }}<i class="icon-heart"></i></div>
         <div class="useredit"><i class="icon-trash icons interactive"></i><i class="icon-heart icons interactive"></i></div>
       </div>
+      {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="/tags/{{ tag_link }}">{{ tag_link }}</a>{{/each}}</div>{{/if}}
     </div>
   </div>
 </template>
+
 

@@ -7,7 +7,8 @@ Meteor.startup(function () {
         	avatar:"Admin",
         	smark:"Hello Smarks", 
         	owner:"admin",
-        	timestamp:new Date().getTime()
+        	timestamp:new Date().getTime(),
+            tags:[]
         });
     }
 });
