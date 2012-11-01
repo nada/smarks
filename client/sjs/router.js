@@ -6,11 +6,11 @@ var SmarksRouter = Backbone.Router.extend({
     "tags/:tag": "tags"
   },
   home: function() {
-  	console.log("router: call home");
+  	//console.log("router: call home");
 	Session.set('tag_filters', null);
   },
   tags: function (tag) {
-    console.log("setting tag filter to " + tag);
+    //console.log("setting tag filter to " + tag);
     Session.set('tag_filters', [tag]);
   }
 });

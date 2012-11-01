@@ -41,7 +41,8 @@ Template.timeline.posts = function() {
 	var q = {};
 	if(!Session.equals("tag_filters", null))
 	{
-		q = {tags: {$in:Session.get("tag_filters")} };
+		//q =  {$or:[{tags:{$exists:false}},{tags:{$in:Session.get("tag_filters")}}]};
+		q = {tags:{$in:Session.get("tag_filters")}};
 	}
 	var res = Smarks.find(q, {sort: {timestamp:-1}});
 	sJS.updateTitle(res.count());
@@ -81,7 +82,8 @@ Template.post.events({
 });
 
 Template.post.has_tags = function(){
-	return (this.tags.length > 0);
+	if(this.tags != null) return (this.tags.length > 0);
+	else return false;
 };
 
 Template.post.tags = function(){
@@ -187,7 +189,6 @@ Template.page.showNews = function()
 {
 	if(Meteor.userLoaded())
 	{
-		console.log($.cookie('newsstate'));
 		if(!$.cookie('newsstate') || ($.cookie('newsstate') < currentNewsState))
 		{
 			$.cookie('newsstate', currentNewsState, { expires: 366, path: '/' });
