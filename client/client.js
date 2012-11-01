@@ -1,24 +1,49 @@
 
 
-// ----------------main
+// collections
 Smarks = new Meteor.Collection("smarks");
 Favs = new Meteor.Collection("favs");
 SuperU = new Meteor.Collection("superu");
 
+//routing events via backbone
+Router = new SmarksRouter;
+
+Session.set('tag_filters', null);
 
 Meteor.subscribe("smarks");
 Meteor.subscribe("favs");
 Meteor.subscribe("superu");
-
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
 
 
+
+// TIMELINE HEADER __________________________________________
+
+Template.timeline_header.has_tag_filters = function() {
+	return !Session.equals('tag_filters', null);
+};
+
+Template.timeline_header.tag_filters = function() {
+	return Session.get('tag_filters');
+};
+
+Template.timeline_header.rendered = function(){
+	$(this.findAll('.icon-remove')).parent().click(function(){
+		Router.navigate("", true);
+	});
+};
+
 // TIMELINE _________________________________________________
 Template.timeline.posts = function() {
-	var res = Smarks.find({}, {sort: {timestamp:-1}});
+	var q = {};
+	if(!Session.equals("tag_filters", null))
+	{
+		q = {tags: {$in:Session.get("tag_filters")} };
+	}
+	var res = Smarks.find(q, {sort: {timestamp:-1}});
 	sJS.updateTitle(res.count());
 	return res;
 };
@@ -47,41 +72,6 @@ Template.timeline.rendered = function() {
 
 // POST _________________________________________________
 
-Template.post.rendered = function () {
-	//wire up trash and fav icon
-	var postId = this.data._id;
-	$(this.firstNode).attr("data-id", postId);
-	if(this.data.owner !== Meteor.userId())
-	{
-		$(this.find('i.icon-trash.interactive')).css('display', 'none');
-	}
-	else
-	{
-		$(this.find('i.icon-trash.interactive')).unbind('click').click(function(){
-			Smarks.remove({_id:postId});
-			Favs.remove({postId:postId});
-		});
-	}
-
-	$(this.find('i.icon-heart.interactive')).unbind('click').click(function(){
-		//toggle favs
-		if($(this).parents('.box.smark').hasClass('favourite'))
-		{
-			//remove fav marker
-			Favs.remove({postId:postId, owner:Meteor.userId()});
-			$(this).parents('.box.smark').removeClass('favourite');
-		}	
-		else
-		{
-			//mark fav
-			Favs.insert({
-		  		owner: Meteor.userId(),
-		  		postId: postId
-			});
-			$(this).parents('.box.smark').addClass('favourite');
-		}
-	});
-};
 
 Template.post.events({
   	'mouseenter': function (event) { 
@@ -132,6 +122,47 @@ Template.post.helpers({
   	return hearts;
   }
 });
+
+Template.post.rendered = function () {
+	//wire up trash and fav icon
+	var postId = this.data._id;
+	$(this.firstNode).attr("data-id", postId);
+	if(this.data.owner !== Meteor.userId())
+	{
+		$(this.find('i.icon-trash.interactive')).css('display', 'none');
+	}
+	else
+	{
+		$(this.find('i.icon-trash.interactive')).unbind('click').click(function(){
+			Smarks.remove({_id:postId});
+			Favs.remove({postId:postId});
+		});
+	}
+
+	$(this.findAll('.tag-link')).click(function(evt){
+		evt.preventDefault();
+		Router.navigate("tags/" + evt.target.text, true);
+	});
+
+	$(this.find('i.icon-heart.interactive')).unbind('click').click(function(){
+		//toggle favs
+		if($(this).parents('.box.smark').hasClass('favourite'))
+		{
+			//remove fav marker
+			Favs.remove({postId:postId, owner:Meteor.userId()});
+			$(this).parents('.box.smark').removeClass('favourite');
+		}	
+		else
+		{
+			//mark fav
+			Favs.insert({
+		  		owner: Meteor.userId(),
+		  		postId: postId
+			});
+			$(this).parents('.box.smark').addClass('favourite');
+		}
+	});
+};
 
 
 // PAGE _________________________________________________
@@ -250,6 +281,8 @@ Template.page.rendered = function () {
 
 Meteor.startup(function () {
 	$(window).resize(sJS.repositionPosts);
+
+	Backbone.history.start({pushState: true});
 
 	if (SuperU.find().count() === 0) {
 		console.log("no super user set until now!")

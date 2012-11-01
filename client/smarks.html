@@ -26,11 +26,17 @@
         {{/if}}
       </div>
     </div>
+
+    <div class="row-fluid">
+      <div class="span1"></div>
+      <div class="span10 timeline-header">
+        {{> timeline_header}}
+      </div>
+    </div>
     
     <div class="row-fluid">
       <div class="span1"></div>
       <div class="span10 timeline">
-        <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
         {{> timeline }}
       </div>
     </div>
@@ -60,6 +66,13 @@
 
 </template>
 
+<template name="timeline_header">
+  <div>
+    {{#if has_tag_filters}}{{#each tag_filters}}<button class="btn btn-small" type="button"><i class="icon-remove"></i>{{this}}}</button>{{/each}}{{/if}}
+    <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
+  </div>
+</template>
+
 <template name="timeline">
     {{#each posts}}
       {{> post}}
@@ -75,7 +88,7 @@
         <div class="time">{{ formatdate timestamp }}, {{ totalhearts }}<i class="icon-heart"></i></div>
         <div class="useredit"><i class="icon-trash icons interactive"></i><i class="icon-heart icons interactive"></i></div>
       </div>
-      {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="/tags/{{ tag_link }}">{{ tag_link }}</a>{{/each}}</div>{{/if}}
+      {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="#" class="tag-link">{{ tag_link }}</a>{{/each}}</div>{{/if}}
     </div>
   </div>
 </template>
