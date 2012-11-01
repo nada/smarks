@@ -96,28 +96,9 @@ Template.post.tag_link = function(){
 };
 
 Template.post.helpers({
-  formatdate: function (object) {
-  	var diff = new Date().getTime() - object;
-  	var m = Math.floor(diff / 1000 / 60);
-  	var mm = m % 60;
-  	var h = Math.floor(m / 60);
-  	var hh = h % 60;
-  	var dd = Math.floor(h / 24);
-
-  	var str = "";
-  	if(dd > 0) {
-  		if(dd == 1) str += dd + " day ago";
-  		else str += dd + " days ago";
-  	}
-  	else if(hh > 0) {
-  		if(hh == 1) str += hh + " hour ago";
-  		else str += hh + " hours ago";
-  	}
-  	else {
-  		if(mm == 1) str += mm + " minute ago";
-  		else str += mm + " minutes ago";
-  	}
-    return str;
+  timeSince: function (timestamp) {
+  	console.log(timestamp);
+    return sJS.timeSince(timestamp);
   },
   totalhearts: function() {
   	var hearts = Favs.find({postId:this._id}).count();
@@ -267,26 +248,32 @@ Template.page.rendered = function () {
 			$.embedly(res.urls, {
 					key:'f8fe34981bf2459e850c443dd1e587b7',
 					maxWidth: '260px', 
-					maxHeight: '260px'
-				}, function(oembed, dict){
-	   				switch(oembed.type)
-					{
-						case "photo":
-							$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a></div>');
-							break;
-						case "link":
-							if(oembed.thumbnail_url) {
-								$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a></div>'); 	
-							}
-							break;
-						case "video":
-						case "rich":
-							$(node).append('<div class="embedly" style="width:'+oembed.width+'px;height:'+oembed.height+'px;">' + oembed.html + '</div>');
-							break;
-						default:
-							break;
+					maxHeight: '260px',
+					success: function(oembed, dict){
+						console.log("yo");
+	   					switch(oembed.type)
+						{
+							case "photo":
+								$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a></div>');
+								break;
+							case "link":
+								if(oembed.thumbnail_url) {
+									$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a></div>'); 	
+								}
+								break;
+							case "video":
+							case "rich":
+								$(node).append('<div class="embedly" style="width:'+oembed.width+'px;height:'+oembed.height+'px;">' + oembed.html + '</div>');
+								break;
+							default:
+								break;
+						}
+						sJS.repositionPosts();  				
+					},
+					error:function(node, dict) {
+						//do nothing for the moment
+						console.log(node);
 					}
-					sJS.repositionPosts();  				
 				}
 			);
 		}

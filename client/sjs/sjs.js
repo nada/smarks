@@ -95,7 +95,30 @@
 		urls = text.match(exp);
 		text = text.replace(exp,"<a class='link' href='$1'>$1</a>");
 		return {urls:urls, text:text}; 
-	}
+	};
+
+	timeSince = function(timestamp) {
+		var diff = new Date().getTime() - timestamp;
+	  	var m = Math.floor(diff / 1000 / 60);
+	  	var mm = m % 60;
+	  	var h = Math.floor(m / 60);
+	  	var hh = h % 60;
+	  	var dd = Math.floor(h / 24);
+	  	var str = "";
+	  	if(dd > 0) {
+	  		if(dd == 1) str += dd + " day ago";
+	  		else str += dd + " days ago";
+	  	}
+	  	else if(hh > 0) {
+	  		if(hh == 1) str += hh + " hour ago";
+	  		else str += hh + " hours ago";
+	  	}
+	  	else {
+	  		if(mm == 1) str += mm + " minute ago";
+	  		else str += mm + " minutes ago";
+	  	}
+	    return str;
+	};
 
 	// ---------------------------------------------------------------------
     //public api
@@ -105,7 +128,8 @@
     	repositionPosts: function(event) { repositionPosts(event); },
     	resetNewPostsBadge: function(increment) { resetNewPostsBadge(increment); },
     	updateTitle: function(n) { updateTitle(n); },
-    	linkify: function(text) { return linkify(text); }
+    	linkify: function(text) { return linkify(text); },
+    	timeSince: function(timestamp) { return timeSince(timestamp); }
     };
 
 })($);

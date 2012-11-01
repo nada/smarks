@@ -96,7 +96,7 @@
     <div class="footer clearfix">
       <div class="avatar">{{ avatar }}</div>
       <div class="util clearfix">
-        <div class="time">{{ formatdate timestamp }}, {{ totalhearts }}<i class="icon-heart"></i></div>
+        <div class="time">{{ timeSince timestamp }}, {{ totalhearts }}<i class="icon-heart"></i></div>
         <div class="useredit"><i class="icon-trash icons interactive"></i><i class="icon-heart icons interactive"></i></div>
       </div>
       {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="#" class="tag-link">{{ tag_link }}</a>{{/each}}</div>{{/if}}
