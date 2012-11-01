@@ -181,6 +181,22 @@ Template.page.events({
 });
 */
 
+currentNewsState = 1;
+
+Template.page.showNews = function()
+{
+	if(Meteor.userLoaded())
+	{
+		console.log($.cookie('newsstate'));
+		if(!$.cookie('newsstate') || ($.cookie('newsstate') < currentNewsState))
+		{
+			$.cookie('newsstate', currentNewsState, { expires: 366, path: '/' });
+			return true;
+		}
+	}
+	return false;
+}
+
 Template.page.events(sJS.okCancelEvents(
 	'#new-smark',
 	{
