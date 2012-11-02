@@ -97,7 +97,6 @@ Template.post.tag_link = function(){
 
 Template.post.helpers({
   timeSince: function (timestamp) {
-  	console.log(timestamp);
     return sJS.timeSince(timestamp);
   },
   totalhearts: function() {
@@ -250,7 +249,6 @@ Template.page.rendered = function () {
 					maxWidth: '260px', 
 					maxHeight: '260px',
 					success: function(oembed, dict){
-						console.log("yo");
 	   					switch(oembed.type)
 						{
 							case "photo":
@@ -271,8 +269,8 @@ Template.page.rendered = function () {
 						sJS.repositionPosts();  				
 					},
 					error:function(node, dict) {
-						//do nothing for the moment
-						console.log(node);
+						//do nothing than logging for the moment
+						console.log("an error occured> node/dict :", node, dict);
 					}
 				}
 			);
