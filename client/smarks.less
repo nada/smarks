@@ -2,10 +2,12 @@
 @boxWidth:          300px;
 @boxPadding:		20px;
 @boxOffset:          10px;
-@boxFooterHeight:	25px;
+//@boxFooterHeight:	25px;
+@boxInfoTopBotPadding: 7px;
+@boxInfoLineHeight:  15px;
 
 //FOOTER
-@footerHeight:		20px;
+@footerHeight:		19px;
 
 @favouriteColor:    #968249;
 @hotPink:           #fe57a1;
@@ -202,6 +204,8 @@ a:hover{
     margin-top:-8px;
 }
 
+*/
+
 
 
 .footer-row
@@ -211,7 +215,7 @@ a:hover{
     position:fixed;
     bottom:0px;
     left:0px;
-    padding:0px 20px;
+    padding:3px @boxPadding 5px;
     width:100%;
     font-size:12px;
     
@@ -271,7 +275,7 @@ a:hover{
     position: absolute;
     padding-bottom: 50px;
     top: -2px;
-    padding-top: 10px;
+    padding-top: 8px;
     left: 10px;
     color: #fff;
 }
