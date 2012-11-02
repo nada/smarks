@@ -78,10 +78,12 @@
 </template>
 
 <template name="timeline_header">
+  {{#if currentUser}}
   <div>
     {{#if has_tag_filters}}{{#each tag_filters}}<button class="btn btn-small" type="button"><i class="icon-remove"></i>{{this}}}</button>{{/each}}{{/if}}
     <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
   </div>
+  {{/if}}
 </template>
 
 <template name="timeline">
@@ -93,6 +95,7 @@
 <template name="post">
   <div class="box smark">
     <div class="inner">{{ smark }}</div>
+    {{#if currentUser}}
     <div class="footer clearfix">
       <div class="avatar">{{ avatar }}</div>
       <div class="util clearfix">
@@ -101,6 +104,7 @@
       </div>
       {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="#" class="tag-link">{{ tag_link }}</a>{{/each}}</div>{{/if}}
     </div>
+    {{/if}}
   </div>
 </template>
 
