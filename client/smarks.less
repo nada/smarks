@@ -9,8 +9,10 @@
 //FOOTER
 @footerHeight:		19px;
 
-@favouriteColor:    #968249;
-@hotPink:           #fe57a1;
+@colorGold:         #968249;
+@colorGoldDark:     #614D2B;
+@colorInfo:         #999999;
+@colorHotPink:      #fe57a1;
 
 
 
@@ -20,7 +22,7 @@
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:active {
-    background-color: #968249;
+    background-color: @colorGold;
     background-image: none;
 }
 /* ------------------------------------------------ */
@@ -32,7 +34,7 @@ body {
 a,
 #login-buttons a {
     text-decoration: none;
-    color:@favouriteColor;
+    color:@colorGold;
 }
 a:hover{
     text-decoration: none;
@@ -96,7 +98,7 @@ a:hover{
 
 .box.favourite
 {
-    border:1px solid @favouriteColor;
+    border:1px solid @colorGold;
 }
 
 .box a {
@@ -117,96 +119,81 @@ a:hover{
 	margin:10px 0px 0px 0px;
 }
 
-.box .footer {
-    border-top: 1px solid #EDEDED;
-    height: @boxFooterHeight;
-    line-height: @boxFooterHeight;
-    padding: 5px @boxPadding;
-    position: relative;
+//info box 
 
-    color: #999999;
-    font-family: Arial;
+.box .info {
+    border-top: 1px solid #EDEDED;
+    /*line-height: @boxInfoLineHeight;*/
+    padding: @boxInfoTopBotPadding @boxPadding;
+    position: relative;
+    color: @colorInfo;
     font-size: 11px;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-.box .footer .avatar,
-.box .footer .tags
+.info .default,
+.info:hover .over
+{
+    display:block;
+}
+
+.info:hover .default,
+.info .over
+{
+    display:none;
+}
+
+.info .default {
+    text-align:right;
+}
+
+.info i
+{
+    font-size:14px;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.info i:hover
+{
+   color:@colorGold;
+}
+
+.info .default a 
+{
+    display:inline;
+}
+
+.info .default .icon-tags
+{
+    margin-right:10px;
+}
+
+.info .edit .avatar
 {
     float:left;
 }
 
-.box .footer .util
+.info .edit .icons
 {
     float:right;
-    margin-top:-2px;
 }
 
-.box .footer .util .time
-{
-    display:block;
-}
-
-.box .footer:hover .util .time
-{
-    display:none;
-}
-
-.box .footer .util .useredit
-{
-    display:none;
-    float:right;
-}
-
-.box .footer:hover .util .useredit
-{
-    display:block;
-}
-
-.box .footer .icons,
-.box .footer .time .icon-heart {
-    opacity: 0.6;
-    cursor:pointer;
-    margin-top:-1px;
-}
-
-.box .footer .icons:hover {
-    opacity: 1.0;
-}
-
-.box .footer .time .icon-heart
-{
-    margin-left:3px;
-    margin-top:-1px;
-}
-
-.box .footer .useredit .icon-heart
+.info .edit i
 {
     margin-left:15px;
 }
 
-.box.favourite .footer .useredit .icon-heart
+.favourite .icon-heart {
+    color:@colorGold;
+}
+
+.favourite .edit .icon-heart:hover
 {
-    opacity: 1.0;
+    color: @colorInfo;
 }
 
-.box .footer .tags {
-    width:100%;
-}
-
-.box .footer .tags i {
-    float:right;
-}
-
-.box .footer .tags a {
-    float:right;
-    display:inline;
-    margin-right: 3px;
-    margin-top:-8px;
-}
-
-*/
-
-
+//footer
 
 .footer-row
 {
@@ -224,13 +211,14 @@ a:hover{
 .footer-row,
 .footer-row a
 {
-    color:#333333;
+    color:black;
     text-decoration:none;
 }
 
 .footer-row a:hover
 {
-    color:#000000;
+    //color:@favouriteColor;
+    color:#614D2B;
 }
 
 .footer-row span
@@ -259,12 +247,12 @@ a:hover{
     -webkit-box-shadow: -2px 0 1px rgba(0, 0, 0, 0.35);
     -o-box-shadow: -2px 0 1px rgba(0, 0, 0, 0.35);
     box-shadow: -2px 0 1px rgba(0, 0, 0, 0.35);
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #968249), color-stop(100%, #614D2B));
-    background-image: -webkit-linear-gradient(#968249, #614D2B);
-    background-image: -moz-linear-gradient(#968249, #614D2B);
-    background-image: -o-linear-gradient(#968249, #614D2B);
-    background-image: -ms-linear-gradient(#968249, #614D2B);
-    background-image: linear-gradient(#968249, #614D2B);
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, @colorGold), color-stop(100%, @colorGoldDark));
+    background-image: -webkit-linear-gradient(@colorGold, @colorGoldDark);
+    background-image: -moz-linear-gradient(@colorGold, @colorGoldDark);
+    background-image: -o-linear-gradient(@colorGold, @colorGoldDark);
+    background-image: -ms-linear-gradient(@colorGold, @colorGoldDark);
+    background-image: linear-gradient(@colorGold, @colorGoldDark);
     display: -moz-inline-box;
     -moz-box-orient: vertical;
     display: inline-block;

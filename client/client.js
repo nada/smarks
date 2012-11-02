@@ -22,11 +22,11 @@ Accounts.ui.config({
 
 // TIMELINE HEADER __________________________________________
 
-Template.timeline_header.has_tag_filters = function() {
+Template.timeline_header.hasTagFilters = function() {
 	return !Session.equals('tag_filters', null);
 };
 
-Template.timeline_header.tag_filters = function() {
+Template.timeline_header.tagFilters = function() {
 	return Session.get('tag_filters');
 };
 
@@ -74,14 +74,7 @@ Template.timeline.rendered = function() {
 // POST _________________________________________________
 
 
-Template.post.events({
-  	'mouseenter': function (event) { 
-  		sJS.resetNewPostsBadge(0);
-  		return false;
-  	}
-});
-
-Template.post.has_tags = function(){
+Template.post.hasTags = function(){
 	if(this.tags != null) return (this.tags.length > 0);
 	else return false;
 };
@@ -91,9 +84,17 @@ Template.post.tags = function(){
 	else return [];
 };
 
-Template.post.tag_link = function(){
-	return this;
-};
+Template.post.isOwner = function() {
+	console.log(this.owner);
+	return (this.owner == Meteor.userId());
+}
+
+Template.post.events({
+  	'mouseenter': function (event) { 
+  		sJS.resetNewPostsBadge(0);
+  		return false;
+  	}
+});
 
 Template.post.helpers({
   timeSince: function (timestamp) {
@@ -109,6 +110,12 @@ Template.post.rendered = function () {
 	//wire up trash and fav icon
 	var postId = this.data._id;
 	$(this.firstNode).attr("data-id", postId);
+	
+	$(this.find('i.icon-remove')).click(function(){
+		Smarks.remove({_id:postId});
+		Favs.remove({postId:postId});
+	});
+	/*
 	if(this.data.owner !== Meteor.userId())
 	{
 		$(this.find('i.icon-trash.interactive')).css('display', 'none');
@@ -120,13 +127,18 @@ Template.post.rendered = function () {
 			Favs.remove({postId:postId});
 		});
 	}
+	*/
 
+	/*
 	$(this.findAll('.tag-link')).click(function(evt){
 		evt.preventDefault();
 		Router.navigate("tags/" + evt.target.text, true);
 	});
+	*/
 
-	$(this.find('i.icon-heart.interactive')).unbind('click').click(function(){
+
+	this.find('.edit i.icon-heart').click(function(){
+		console.log("fav clicked");
 		//toggle favs
 		if($(this).parents('.box.smark').hasClass('favourite'))
 		{

@@ -6,9 +6,9 @@
 preserve-inputs
 accounts-twitter
 accounts-facebook
-bootstrap
 less
 accounts-base
 accounts-password
 accounts-ui
 backbone
+bootstrap-with-fontawesome

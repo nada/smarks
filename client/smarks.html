@@ -44,7 +44,7 @@
 
     <div class="footer-row">
       <span><a href="http://flashpogo.com" target="_blank">smarks!</a> /<em>(0.4.0b1)</em></span>
-      <span><a href="https://github.com/nada/smarks" target="_blank">your own smarks?</a></span>
+      <span><a href="https://github.com/nada/smarks" target="_blank">your own smarks? <i class="icon-github"></i></a></span>
     </div>
 
   </div>
@@ -80,7 +80,7 @@
 <template name="timeline_header">
   {{#if currentUser}}
   <div>
-    {{#if has_tag_filters}}{{#each tag_filters}}<button class="btn btn-small" type="button"><i class="icon-remove"></i>{{this}}}</button>{{/each}}{{/if}}
+    {{#if hasTagFilters}}{{#each tagFilters}}<button class="btn btn-small" type="button"><i class="icon-remove"></i>{{this}}}</button>{{/each}}{{/if}}
     <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
   </div>
   {{/if}}
@@ -96,13 +96,19 @@
   <div class="box smark">
     <div class="inner">{{ smark }}</div>
     {{#if currentUser}}
-    <div class="footer clearfix">
-      <div class="avatar">{{ avatar }}</div>
-      <div class="util clearfix">
-        <div class="time">{{ timeSince timestamp }}, {{ totalhearts }}<i class="icon-heart"></i></div>
-        <div class="useredit"><i class="icon-trash icons interactive"></i><i class="icon-heart icons interactive"></i></div>
+    <div class="info clearfix">
+      <div class="default clearfix"><!--{{ timeSince timestamp }}-->
+           {{#if hasTags}}
+            {{#each tags}}
+              <!--<a href="#" class="tag-link">-->{{ this }}<!--</a>-->
+            {{/each}}
+            <i class="icon-tags icons"></i>
+           {{/if}}
+        {{ totalhearts }}<i class="icon-heart"></i></div>
+      <div class="over edit clearfix">
+        <span class="avatar"><a href="#">{{ avatar }}</a></span>
+        <span class="icons">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}<i class="icon-tags"></i><i class="icon-heart"></i></span>
       </div>
-      {{#if has_tags}}<div class="tags"><i class="icon-tag icons"></i>{{#each tags}}<a href="#" class="tag-link">{{ tag_link }}</a>{{/each}}</div>{{/if}}
     </div>
     {{/if}}
   </div>
