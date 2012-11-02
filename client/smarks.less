@@ -68,6 +68,15 @@ a:hover{
     position:relative;
 }
 
+.timeline-header {
+    margin-bottom:3px;
+}
+
+.timeline-header button
+{
+    margin-right:10px;
+}
+
 .fav-only
 {
     position:absolute;
@@ -96,6 +105,11 @@ a:hover{
           
 }
 
+.box:hover
+{
+    border-color:#cccccc;
+}
+
 .box.favourite
 {
     border:1px solid @colorGold;
@@ -121,29 +135,58 @@ a:hover{
 
 //info box 
 
-.box .info {
-    border-top: 1px solid #EDEDED;
-    /*line-height: @boxInfoLineHeight;*/
+.box .info
+{
+    height:14px;
     padding: @boxInfoTopBotPadding @boxPadding;
+    border-top: 1px solid #EDEDED;
     position: relative;
     color: @colorInfo;
     font-size: 11px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif; 
+    line-height: @boxInfoLineHeight;
+    z-index:1;
 }
 
-.info .default,
-.info:hover .over
+.box .info-more {
+    color: @colorInfo;
+    font-size: 11px;
+    font-family: Helvetica, Arial, sans-serif; 
+    line-height: @boxInfoLineHeight;
+
+
+    position:absolute;
+   /* margin-top:-25px;*/
+    overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    display:none;
+    background-color:white;
+    top:(-14px - (2 * @boxInfoTopBotPadding) - 1px);
+    height:14px;
+    padding: @boxInfoTopBotPadding @boxPadding;
+    width: (@boxWidth - 2 * @boxPadding);
+    left: 0;
+    z-index:2;
+
+    -webkit-box-shadow: 0px -2px 2px -2px black;
+    box-shadow: 0px -2px 2px -2px black;
+}
+
+.box .info:hover .info-more
 {
     display:block;
 }
 
-.info:hover .default,
-.info .over
+.info-more .avatar-time
 {
-    display:none;
+    float:left;
+}
+.info-more .remove
+{
+    float:right;
 }
 
-.info .default {
+.info {
     text-align:right;
 }
 
@@ -159,16 +202,17 @@ a:hover{
    color:@colorGold;
 }
 
-.info .default a 
+.info a 
 {
     display:inline;
 }
 
-.info .default .icon-tags
+.info .icon-tags
 {
     margin-right:10px;
 }
 
+/*
 .info .edit .avatar
 {
     float:left;
@@ -183,15 +227,17 @@ a:hover{
 {
     margin-left:15px;
 }
+*/
 
 .favourite .icon-heart {
     color:@colorGold;
 }
 
-.favourite .edit .icon-heart:hover
+.favourite .icon-heart:hover
 {
     color: @colorInfo;
 }
+
 
 //footer
 

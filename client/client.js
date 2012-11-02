@@ -32,7 +32,10 @@ Template.timeline_header.tagFilters = function() {
 
 Template.timeline_header.rendered = function(){
 	$(this.findAll('.icon-remove')).parent().click(function(){
-		Router.navigate("", true);
+		var d = _.difference(Session.get('tag_filters'), [$(this).data('tag')]);
+		if(d.length == 0) d = null;
+		Session.set('tag_filters', d);
+		//Router.navigate("", true);
 	});
 };
 
@@ -85,7 +88,6 @@ Template.post.tags = function(){
 };
 
 Template.post.isOwner = function() {
-	console.log(this.owner);
 	return (this.owner == Meteor.userId());
 }
 
@@ -111,34 +113,31 @@ Template.post.rendered = function () {
 	var postId = this.data._id;
 	$(this.firstNode).attr("data-id", postId);
 	
+	//avatar
+	$(this.find('a.avatar')).click(function(evt){
+		evt.preventDefault();
+		console.log("show profile page");
+	});
+
+	//remove
 	$(this.find('i.icon-remove')).click(function(){
 		Smarks.remove({_id:postId});
 		Favs.remove({postId:postId});
 	});
-	/*
-	if(this.data.owner !== Meteor.userId())
-	{
-		$(this.find('i.icon-trash.interactive')).css('display', 'none');
-	}
-	else
-	{
-		$(this.find('i.icon-trash.interactive')).unbind('click').click(function(){
-			Smarks.remove({_id:postId});
-			Favs.remove({postId:postId});
-		});
-	}
-	*/
-
-	/*
-	$(this.findAll('.tag-link')).click(function(evt){
+	
+	//adding tags to filter
+	$(this.findAll('a.tag')).click(function(evt){
 		evt.preventDefault();
-		Router.navigate("tags/" + evt.target.text, true);
+		Session.set('tag_filters', _.union(Session.get('tag_filters') || [], [evt.target.text]));
 	});
-	*/
 
+	// edit tags
+	$(this.find('.info i.icon-tags')).click(function(){
+		console.log("edit tags");
+	});
 
-	this.find('.edit i.icon-heart').click(function(){
-		console.log("fav clicked");
+	//heart	
+	$(this.find('.info i.icon-heart')).click(function(){
 		//toggle favs
 		if($(this).parents('.box.smark').hasClass('favourite'))
 		{
@@ -156,6 +155,7 @@ Template.post.rendered = function () {
 			$(this).parents('.box.smark').addClass('favourite');
 		}
 	});
+
 };
 
 

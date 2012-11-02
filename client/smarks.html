@@ -79,10 +79,8 @@
 
 <template name="timeline_header">
   {{#if currentUser}}
-  <div>
-    {{#if hasTagFilters}}{{#each tagFilters}}<button class="btn btn-small" type="button"><i class="icon-remove"></i>{{this}}}</button>{{/each}}{{/if}}
+    {{#if hasTagFilters}}{{#each tagFilters}}<button class="btn btn-small" type="button" data-tag="{{this}}"><i class="icon-remove"></i> {{this}}</button>{{/each}}{{/if}}
     <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
-  </div>
   {{/if}}
 </template>
 
@@ -96,19 +94,23 @@
   <div class="box smark">
     <div class="inner">{{ smark }}</div>
     {{#if currentUser}}
-    <div class="info clearfix">
-      <div class="default clearfix"><!--{{ timeSince timestamp }}-->
-           {{#if hasTags}}
-            {{#each tags}}
-              <!--<a href="#" class="tag-link">-->{{ this }}<!--</a>-->
-            {{/each}}
-            <i class="icon-tags icons"></i>
-           {{/if}}
-        {{ totalhearts }}<i class="icon-heart"></i></div>
-      <div class="over edit clearfix">
-        <span class="avatar"><a href="#">{{ avatar }}</a></span>
-        <span class="icons">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}<i class="icon-tags"></i><i class="icon-heart"></i></span>
+    <div class="info">
+      <div class="info-more clearfix">
+        <span class="avatar-time"><a href="#" class="avatar">{{ avatar }}</a>, {{ timeSince timestamp }}</span>
+        <span class="remove">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}</span>
       </div>
+      {{#if hasTags}}{{#each tags}}
+      <a href="#" class="tag">{{ this }}</a>
+      {{/each}}
+      <i class="icon-tags icons"></i>
+      {{/if}}
+      {{ totalhearts }}<i class="icon-heart"></i>
+      <!--
+      <div class="over edit clearfix">
+        <span class="avatar"><a href="#">{{ avatar }}</a> {{ timeSince timestamp }}</span>
+        <span class="icons">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}</span>
+      </div>
+    -->
     </div>
     {{/if}}
   </div>
