@@ -30,14 +30,30 @@ Template.timeline_header.tagFilters = function() {
 	return Session.get('tag_filters');
 };
 
-Template.timeline_header.rendered = function(){
-	$(this.findAll('.icon-remove')).parent().click(function(){
-		var d = _.difference(Session.get('tag_filters'), [$(this).data('tag')]);
+Template.timeline_header.events({
+	'click button.tagfilter':function(evt) {
+		var d = _.difference(Session.get('tag_filters'), [this.toString()]);
 		if(d.length == 0) d = null;
 		Session.set('tag_filters', d);
 		//Router.navigate("", true);
-	});
-};
+	},
+	'click button.fav-only':function(evt, tpl)
+	{
+		console.log($(evt.target).hasClass('btn-primary'));
+		if($(evt.target).hasClass('btn-primary')) {
+			$(evt.target).removeClass('btn-primary');
+			$('.box.smark').fadeIn(function(){
+				repositionPosts();
+			});
+		}
+		else {
+			$(evt.target).addClass('btn-primary');
+			$('.box.smark').not('.favourite').fadeOut(function(){
+				repositionPosts();
+			});
+		}
+	}	
+});
 
 // TIMELINE _________________________________________________
 Template.timeline.posts = function() {
@@ -53,25 +69,11 @@ Template.timeline.posts = function() {
 };
 
 Template.timeline.rendered = function() {
+	//how to do that in meteor??
 	var favDocs = Favs.find({owner:Meteor.userId()}).fetch();
 	for(var d in favDocs) {
 		$('.box.smark[data-id='+favDocs[d].postId+']').addClass("favourite");
-	};
-
-	$('.btn.fav-only').click(function() {
-		if($(this).hasClass('btn-primary')) {
-			$(this).removeClass('btn-primary');
-			$('.box.smark').fadeIn(function(){
-				repositionPosts();
-			});
-		}
-		else {
-			$(this).addClass('btn-primary');
-			$('.box.smark').not('.favourite').fadeOut(function(){
-				repositionPosts();
-			});
-		}
-	});
+	}
 };
 
 // POST _________________________________________________
@@ -92,9 +94,41 @@ Template.post.isOwner = function() {
 }
 
 Template.post.events({
-  	'mouseenter': function (event) { 
+  	'mouseenter': function (evt) { 
   		sJS.resetNewPostsBadge(0);
   		return false;
+  	},
+  	//editing tags
+  	'click .info i.icon-tags': function(evt) {
+  		console.log("edit tags");
+  	},
+  	//hearts: fav markers
+  	'click .info i.icon-heart': function(evt, tpl) {
+ 		if($(tpl.firstNode).hasClass('favourite'))
+		{
+			Favs.remove({postId:this._id, owner:Meteor.userId()});
+			$(tpl.firstNode).removeClass('favourite');
+		}	
+		else
+		{
+			Favs.insert({
+		  		owner: Meteor.userId(),
+		  		postId: this._id
+			});
+			$(tpl.firstNode).addClass('favourite');
+		}
+  	},
+  	'click a.avatar':function(evt) {
+  		evt.preventDefault();
+		console.log("show profile page");
+  	},
+  	'click i.icon-remove':function(evt) {
+  		Smarks.remove({_id:this._id});
+		Favs.remove({postId:this._id});
+  	},
+  	'click a.tag':function(evt){
+  		evt.preventDefault();
+		Session.set('tag_filters', _.union(Session.get('tag_filters') || [], [evt.target.text]));
   	}
 });
 
@@ -108,75 +142,9 @@ Template.post.helpers({
   }
 });
 
-Template.post.rendered = function () {
-	//wire up trash and fav icon
-	var postId = this.data._id;
-	$(this.firstNode).attr("data-id", postId);
-	
-	//avatar
-	$(this.find('a.avatar')).click(function(evt){
-		evt.preventDefault();
-		console.log("show profile page");
-	});
-
-	//remove
-	$(this.find('i.icon-remove')).click(function(){
-		Smarks.remove({_id:postId});
-		Favs.remove({postId:postId});
-	});
-	
-	//adding tags to filter
-	$(this.findAll('a.tag')).click(function(evt){
-		evt.preventDefault();
-		Session.set('tag_filters', _.union(Session.get('tag_filters') || [], [evt.target.text]));
-	});
-
-	// edit tags
-	$(this.find('.info i.icon-tags')).click(function(){
-		console.log("edit tags");
-	});
-
-	//heart	
-	$(this.find('.info i.icon-heart')).click(function(){
-		//toggle favs
-		if($(this).parents('.box.smark').hasClass('favourite'))
-		{
-			//remove fav marker
-			Favs.remove({postId:postId, owner:Meteor.userId()});
-			$(this).parents('.box.smark').removeClass('favourite');
-		}	
-		else
-		{
-			//mark fav
-			Favs.insert({
-		  		owner: Meteor.userId(),
-		  		postId: postId
-			});
-			$(this).parents('.box.smark').addClass('favourite');
-		}
-	});
-
-};
-
 
 // PAGE _________________________________________________
-
-/*
-Template.page.adding_tag = function () {
-  return Session.equals('editing_addtag', this._id);
-};
-
-Template.page.events({
-  'click .addtag': function (evt, tmpl) {
-    Session.set('editing_addtag', this._id);
-    Meteor.flush(); // update DOM before focus
-    sJS.activateInput(tmpl.find("#edittag-input"));
-  }
-});
-*/
-
 currentNewsState = 1;
-
 Template.page.showNews = function()
 {
 	if(Meteor.userLoaded())
@@ -231,21 +199,6 @@ Template.page.events(sJS.okCancelEvents(
 	  }
 	})
 );
-
-/*
-Template.page.events(sJS.okCancelEvents(
-  '#edittag-input',
-  {
-    ok: function (value) {
-      //Todos.update(this._id, {$addToSet: {tags: value}});
-      Session.set('editing_addtag', null);
-    },
-    cancel: function () {
-      Session.set('editing_addtag', null);
-    }
-  })
-);
-*/
 
 //on init page load, this runs 2 times, can't figure out why...
 Template.page.rendered = function () {
