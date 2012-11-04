@@ -1,7 +1,7 @@
  var sJS = (function ($) {
 
-	var BOX_WIDTH = 300;
-	var BOX_OFFSET = 10;
+	var BOX_WIDTH = 280;
+	var BOX_OFFSET = 20;
 
 	var numOfPosts = 0;
 	var firstRun = true;
@@ -67,7 +67,7 @@
 		$(".page").css('height', ($('.timeline').position().top + max + 60) + "px");
 		
 		//fav-only button
-		$('.btn.fav-only').css('left', ((postCols * (BOX_WIDTH + BOX_OFFSET)) + BOX_OFFSET - (2 * $('.btn.fav-only').width())) + "px").show();
+		$('.btn.fav-only').css('left', ((postCols * (BOX_WIDTH + BOX_OFFSET)) - (2 * $('.btn.fav-only').width())) + "px").show();
 	};
 
 	resetNewPostsBadge = function(increment)
