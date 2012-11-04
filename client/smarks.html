@@ -43,7 +43,7 @@
     </div>
 
     <div class="footer-row">
-      <span><a href="http://flashpogo.com" target="_blank">smarks!</a> /<em>(0.4.2b1)</em></span>
+      <span><a href="http://flashpogo.com" target="_blank">smarks!</a> /<em>(0.5.0b1)</em></span>
       <span><a href="https://github.com/nada/smarks" target="_blank">your own smarks? <i class="icon-github"></i></a></span>
     </div>
 
@@ -57,7 +57,7 @@
   <div class="alert alert-info" style="position:absolute;top:30px;width:50%;left:25%;">
     <button type="button" class="close" data-dismiss="alert">×</button>
       <br/><h4>smarks! updated</h4><br/>
-      You've got now a basic tag system, but filters working for the moment only with one tag.<br>
+      You've got now a basic tag system. editing and adding not yet supported<br>
       The post info layout is to be revised, now showing all for fast testing access.<br/><br/>
       Note: As meteor's is in constant flow, at the moment you will see this message in every new browser you access smarks! sorry for the inconvenience...<br/><br/>
   </div>
@@ -102,8 +102,8 @@
       {{#if hasTags}}{{#each tags}}
       <a href="#" class="tag">{{ this }}</a>
       {{/each}}
-      <i class="icon-tags icons"></i>
       {{/if}}
+      <i class="icon-tags icons"></i>
       {{ totalhearts }}<i class="icon-heart"></i>
       <!--
       <div class="over edit clearfix">
