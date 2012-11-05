@@ -93,7 +93,7 @@
 	linkify = function(text) {
 		var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
 		urls = text.match(exp);
-		text = text.replace(exp,"<a class='link' href='$1'>$1</a>");
+		text = text.replace(exp,"<a class='link' target='blank' href='$1'>$1</a>");
 		return {urls:urls, text:text}; 
 	};
 
