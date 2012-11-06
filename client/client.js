@@ -39,7 +39,6 @@ Template.timeline_header.events({
 	},
 	'click button.fav-only':function(evt, tpl)
 	{
-		console.log($(evt.target).hasClass('btn-primary'));
 		if($(evt.target).hasClass('btn-primary')) {
 			$(evt.target).removeClass('btn-primary');
 			$('.box.smark').fadeIn(function(){
@@ -99,8 +98,8 @@ Template.post.events({
   		return false;
   	},
   	//editing tags
-  	'click .info i.icon-tags': function(evt) {
-  		console.log("edit tags");
+  	'click .info i.icon-tags': function(evt, tpl) {
+  		sJS.showTaggingSystem(tpl.firstNode, this.tags);
   	},
   	//hearts: fav markers
   	'click .info i.icon-heart': function(evt, tpl) {
@@ -129,6 +128,21 @@ Template.post.events({
   	'click a.tag':function(evt){
   		evt.preventDefault();
 		Session.set('tag_filters', _.union(Session.get('tag_filters') || [], [evt.target.text]));
+  	},
+  	/* 
+  		these are wired up here, although injected via sJS
+  		like this, we can access sparks data :)
+  	*/
+  	'click button.tag-remove':function(evt){
+  		var tagsUpdated = _.difference(this.tags, $(evt.target).attr('value'));
+  		tagsUpdated = tagsUpdated || [];
+
+  		//remove element
+  		$(evt.target).remove();
+  		Smarks.update(this._id, {tags:tagsUpdated});
+
+
+  		//var d = _.difference(Session.get('tag_filters'), [this.toString()]);
   	}
 });
 
@@ -242,6 +256,26 @@ Template.page.rendered = function () {
 		}
   	}).addClass("linkified");
   	sJS.repositionPosts();
+};
+
+//alltags data
+
+Template.alltags.alltags = function(){
+	var alltags = []
+	var tagDocs = Smarks.find({}, {tags:1}).fetch();
+	for (var d in tagDocs) {
+		if(tagDocs[d].tags) {
+			alltags = _.union(alltags, tagDocs[d].tags);
+
+		}
+	}
+	var alltagsStr = '[';
+	for(var i in alltags)
+	{
+		alltagsStr += '"'+alltags[i]+'",';
+	}
+	alltagsStr = alltagsStr.substr(0, alltagsStr.length-1) + ']';
+	return alltagsStr;
 };
 
 // _________________________________________________________________________

@@ -195,13 +195,16 @@ a:hover{
     text-align:right;
 }
 
+.info [class^="icon-"], .info [class*=" icon-"],
 .info i
 {
+    color: @colorInfo;
     font-size:14px;
     cursor:pointer;
     margin-left:5px;
 }
 
+.info [class^="icon-"]:hover, .info [class*=" icon-"]:hover,
 .info i:hover
 {
    color:@colorGold;
@@ -261,7 +264,48 @@ a:hover{
 }
 
 
+//**/
 
+ul.typeahead {
+    z-index:2050;
+}
+
+#taggingSystem
+{
+    margin-top:5px;
+    left:@boxWidth / 2;
+    z-index:2000;
+    padding:@boxPadding;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #EDEDED;
+    display: block;
+    width: @boxWidth - 2*@boxPadding;
+    position:absolute;
+    font-family: Georgia;
+    font-size:14px;
+
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.35);
+}
+
+#taggingSystem input,
+#taggingSystem button
+{
+    display:block;
+}
+
+#taggingSystem input
+{
+    height:auto;
+    line-height:auto;
+}
+
+#taggingSystem button
+{
+    margin-bottom:0px;
+}
+
+/* ----*/
 
 .beta-ribbon
 {
