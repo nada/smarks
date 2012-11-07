@@ -57,23 +57,9 @@
   <div class="alert alert-info" style="position:absolute;top:30px;width:50%;left:25%;">
     <button type="button" class="close" data-dismiss="alert">×</button>
       <br/><h4>smarks! updated</h4><br/>
-      You've got now a basic tag system. editing and adding not yet supported<br>
-      The post info layout is to be revised, now showing all for fast testing access.<br/><br/>
-      Note: As meteor's is in constant flow, at the moment you will see this message in every new browser you access smarks! sorry for the inconvenience...<br/><br/>
+      introducing some sort of tagging system. try it and give feedback to make it better!<br/><br/>
   </div>
   {{/if}}
-
-  <!--
-  {{#if adding_tag}}
-        <div class="tag edittag">
-          <input type="text" id="edittag-input" value="" />
-        </div>
-        {{else}}
-        <div class="tag addtag">
-          +tag
-        </div>
-        {{/if}}
-      -->
 
 </template>
 
@@ -92,21 +78,33 @@
 
 <template name="post">
   <div class="box smark" data-id="{{this._id}}">
-    <div class="inner">{{ smark }}</div>
+   <div class="inner"><span class="smark">{{smark}}</span>{{#constant}}<div class="embedly empty"></div>{{/constant}}</div>
     {{#if currentUser}}
-    <div class="info">
-      <div class="info-more clearfix">
-        <span class="avatar-time"><a href="#" class="avatar">{{ avatar }}</a>, {{ timeSince timestamp }}</span>
-        <span class="remove">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}</span>
+      <div class="info">
+        <div class="info-more clearfix">
+          <span class="avatar-time"><a href="#" class="avatar">{{ avatar }}</a>, {{ timeSince timestamp }}</span>
+          <span class="remove">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}</span>
+        </div>
+        {{#if hasTags}}{{#each tags}}
+        <a href="#" class="tag">{{ this }}</a>
+        {{/each}}{{/if}}
+        <i class="icon-tags"></i>
+        {{ totalhearts }}<i class="icon-heart"></i>
       </div>
-      {{#if hasTags}}{{#each tags}}
-      <a href="#" class="tag">{{ this }}</a>
-      {{/each}}{{/if}}
-      <i class="icon-tags"></i>
-      {{ totalhearts }}<i class="icon-heart"></i>
-    </div>
+
+      {{#if taggingThis}}
+      <div id="taggingSystem">
+        <a href="#" class="icon-remove"></a>
+        <input id="new-tag" type="text" data-provide="typeahead" data-source='{{alltags}}' placeholder="add a tag"/>
+        {{#if hasTags}}{{#each tags}}
+        <button class="tag-remove btn btn-mini" type="button" value="{{this}}"><i class="icon-remove"></i> {{this}}</button>
+        {{/each}}{{/if}}
+      </div>
+      {{/if}}
+
     {{/if}}
   </div>
+  
 </template>
 
 <template name="alltags">

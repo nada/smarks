@@ -3,16 +3,19 @@
 // collections
 Smarks = new Meteor.Collection("smarks");
 Favs = new Meteor.Collection("favs");
+UserTags = new Meteor.Collection("usertags");
 SuperU = new Meteor.Collection("superu");
 
 //routing events via backbone
 Router = new SmarksRouter;
 
 Session.set('tag_filters', null);
+Session.set('taggingPost', null);
 
 Meteor.subscribe("smarks");
 Meteor.subscribe("favs");
 Meteor.subscribe("superu");
+Meteor.subscribe("usertags");
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -79,17 +82,40 @@ Template.timeline.rendered = function() {
 
 
 Template.post.hasTags = function(){
-	if(this.tags != null) return (this.tags.length > 0);
-	else return false;
+	var numTags = 0;
+	if(this.tags != null)
+		numTags = this.tags.length;
+	numTags += UserTags.find({postId:this._id, owner:Meteor.userId()}).count();
+	return (numTags > 0);
 };
 
 Template.post.tags = function(){
-	if(this.tags != null) return this.tags;
+	
+	var userTags = UserTags.findOne({postId:this._id, owner:Meteor.userId()});
+	var alltags;
+	if(userTags)
+	{
+		var addedtags = userTags.addedtags || [];
+		var suppressedtags = userTags.suppressedtags || [];
+		alltags = _.union(this.tags || [], addedtags);
+		alltags = _.difference(alltags, suppressedtags);
+	}
+	else
+	{
+		alltags = this.tags;
+	}
+
+	if(alltags != null) return alltags;
 	else return [];
+	
 };
 
 Template.post.isOwner = function() {
 	return (this.owner == Meteor.userId());
+}
+
+Template.post.taggingThis = function() {
+	return Session.equals('taggingPost', this._id);
 }
 
 Template.post.events({
@@ -99,7 +125,14 @@ Template.post.events({
   	},
   	//editing tags
   	'click .info i.icon-tags': function(evt, tpl) {
-  		sJS.showTaggingSystem(tpl.firstNode, this.tags);
+  		if(Session.equals('taggingPost', null))
+  			Session.set('taggingPost', this._id);
+  		else {
+  			if(Session.equals('taggingPost', this._id))
+  				Session.set('taggingPost', null);
+  			else
+  				Session.set('taggingPost', this._id);
+  		}
   	},
   	//hearts: fav markers
   	'click .info i.icon-heart': function(evt, tpl) {
@@ -133,18 +166,113 @@ Template.post.events({
   		these are wired up here, although injected via sJS
   		like this, we can access sparks data :)
   	*/
-  	'click button.tag-remove':function(evt){
-  		var tagsUpdated = _.difference(this.tags, $(evt.target).attr('value'));
-  		tagsUpdated = tagsUpdated || [];
+  	'click button.tag-remove':function(evt, tpl){
+  		var tagToRemove = $(evt.target).val();
+  		//check if tag was in user tags or has to be removed form smarks tags
 
-  		//remove element
-  		$(evt.target).remove();
-  		Smarks.update(this._id, {tags:tagsUpdated});
+  		var tags = tpl.data.tags || [];
+	  	var res = UserTags.findOne({postId:tpl.data._id, owner:Meteor.userId()}) || {};
+	  	var userAddedTags = res.addedtags || [];
+	  	var userSuppressedTags = res.suppressedtags || [];
 
-
-  		//var d = _.difference(Session.get('tag_filters'), [this.toString()]);
+	  	if(_.indexOf(tags, tagToRemove) >= 0)
+	  	{
+	  		//refactor: extract
+	  		var suppressedtags = _.union(userSuppressedTags, tagToRemove);
+	  		if (!res._id)
+			{
+				UserTags.insert({
+		  			postId: tpl.data._id,
+					owner: Meteor.userId(),
+					addedtags:[],
+			  		suppressedtags:suppressedtags
+			  	});
+			}
+			else
+			{
+				UserTags.update(
+					{
+		  				postId: tpl.data._id,
+						owner: Meteor.userId()
+					}, {
+			  			$set:{suppressedtags:suppressedtags}
+			  		}
+			  	);
+			}
+	  	}
+	  	else if(_.indexOf(userAddedTags, tagToRemove) >= 0)
+	  	{
+	  		//duplicate refactor here!
+	  		var addedtags = _.difference(userAddedTags, tagToRemove);
+	  		if (!res._id)
+			{
+				UserTags.insert({
+		  			postId: tpl.data._id,
+					owner: Meteor.userId(),
+			  		addedtags:addedtags,
+			  		suppressedtags:[]
+			  	});
+			}
+			else
+			{
+				UserTags.update(
+					{
+		  				postId: tpl.data._id,
+						owner: Meteor.userId()
+					}, {
+			  			$set:{addedtags:addedtags}
+			  		}
+			  	);
+			}	
+	  	}
+  	},
+  	'click #taggingSystem a.icon-remove':function(evt) {
+  		Session.set('taggingPost', null);
   	}
 });
+
+Template.post.events(sJS.okCancelEvents(
+	'#new-tag',
+	{
+	  ok: function (newTag, evt) {
+	  	var tags = this.tags || [];
+	  	var res = UserTags.findOne({postId:this._id, owner:Meteor.userId()}) || {};
+	  	var userTags = res.addedtags || [];
+	  	var alltags = _.union(tags, userTags, newTag);
+	  	var addedtags = _.difference(alltags, tags);
+	  	
+	  	//not ideal but mongo's upsert option is missing in meteor at the moment
+
+	  	//duplicate refactor here!
+		if (!res._id)
+		{
+			UserTags.insert({
+	  			postId: this._id,
+				owner: Meteor.userId(),
+		  		addedtags:addedtags,
+		  		suppressedtags:[]
+		  	});
+		}
+		else
+		{
+			UserTags.update(
+				{
+	  				postId: this._id,
+					owner: Meteor.userId()
+				}, {
+		  			$set:{addedtags:addedtags}
+		  		}
+		  	);
+		}	
+		evt.target.value = '';
+	  },
+	  cancel: function(evt) {
+	  	//out on escape
+	  	if(evt.keyCode === 27) Session.set('taggingPost', null);
+	  }
+	  
+	})
+);
 
 Template.post.helpers({
   timeSince: function (timestamp) {
@@ -153,12 +281,31 @@ Template.post.helpers({
   totalhearts: function() {
   	var hearts = Favs.find({postId:this._id}).count();
   	return hearts;
+  },
+  alltags: function() {
+  	var alltags = []
+	var tagDocs = Smarks.find({}, {tags:1}).fetch();
+	for (var d in tagDocs) {
+		if(tagDocs[d].tags)
+			alltags = _.union(alltags, tagDocs[d].tags);
+	}
+	var alltagsStr = '[';
+	for(var i in alltags)
+	{
+		alltagsStr += '"'+alltags[i]+'",';
+	}
+	alltagsStr = alltagsStr.substr(0, alltagsStr.length-1) + ']';
+	return alltagsStr;
   }
 });
 
+Template.post.rendered = function(){
+	sJS.activateInput($('#new-tag'));
+}
 
 // PAGE _________________________________________________
-currentNewsState = 1;
+currentNewsState = 2;
+
 Template.page.showNews = function()
 {
 	if(Meteor.userLoaded())
@@ -219,10 +366,10 @@ Template.page.rendered = function () {
 	//go through every post and linkify and ebedly it
 	$('.smark .inner').not('.linkified').each(function(){
 		var res = sJS.linkify($(this).text());
-		$(this).html(res.text);
+		$(this).find('span.smark').html(res.text);
 		if(res.urls != null)
 		{
-			var node = this;
+			var node = $(this).find('div.embedly');
 			$.embedly(res.urls, {
 					key:'f8fe34981bf2459e850c443dd1e587b7',
 					maxWidth: '260px', 
@@ -231,20 +378,23 @@ Template.page.rendered = function () {
 	   					switch(oembed.type)
 						{
 							case "photo":
-								$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a></div>');
+								$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a>');
 								break;
 							case "link":
+
 								if(oembed.thumbnail_url) {
-									$(node).append('<div class="embedly"><a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a></div>'); 	
+									$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a>'); 	
 								}
 								break;
 							case "video":
 							case "rich":
-								$(node).append('<div class="embedly" style="width:'+oembed.width+'px;height:'+oembed.height+'px;">' + oembed.html + '</div>');
+								$(node).attr("style", "width:"+oembed.width+"px;height:"+oembed.height+"px;");
+								$(node).html(oembed.html);
 								break;
 							default:
 								break;
 						}
+						$(node).removeClass("empty");
 						sJS.repositionPosts();  				
 					},
 					error:function(node, dict) {
@@ -258,25 +408,6 @@ Template.page.rendered = function () {
   	sJS.repositionPosts();
 };
 
-//alltags data
-
-Template.alltags.alltags = function(){
-	var alltags = []
-	var tagDocs = Smarks.find({}, {tags:1}).fetch();
-	for (var d in tagDocs) {
-		if(tagDocs[d].tags) {
-			alltags = _.union(alltags, tagDocs[d].tags);
-
-		}
-	}
-	var alltagsStr = '[';
-	for(var i in alltags)
-	{
-		alltagsStr += '"'+alltags[i]+'",';
-	}
-	alltagsStr = alltagsStr.substr(0, alltagsStr.length-1) + ']';
-	return alltagsStr;
-};
 
 // _________________________________________________________________________
 

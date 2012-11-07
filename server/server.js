@@ -20,3 +20,7 @@ Meteor.publish("smarks", function () {
 Meteor.publish("favs", function() {
     return Favs.find({});
 })
+
+Meteor.publish("usertags", function() {
+    return UserTags.find({});
+})

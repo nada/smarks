@@ -17,7 +17,6 @@
 	  var events = {};
 	  events['keyup '+selector+', keydown '+selector+', focusout '+selector] =
 		function (evt) {
-			console.log(evt.which);
 		  if (evt.type === "keydown" && evt.which === 27 ||
 					 evt.type === "focusout") {
 			// escape = cancel
@@ -121,25 +120,6 @@
 	    return str;
 	};
 
-	/* not so nice. a) no chance to do this in meteor? b) do nicer jquery */
-	showTaggingSystem = function(node, tagarray) {
-		var alltagsString = $('.alltags').attr('data-alltags');
-		var inset = '<div id="taggingSystem">' +
-			'<input type="text" data-provide="typeahead" data-source=\''+alltagsString+'\'/>';
-		for(t in tagarray)
-		{
-			inset += '<button class="tag-remove btn btn-mini" type="button" value="'+tagarray[t]+'"><i class="icon-remove"></i> '+tagarray[t]+'</button>';
-		}
-			
-		inset += '</div>';
-		//wire up tagging system
-
-
-		//finally focus input
-		var el = $(node).append(inset);
-		activateInput($(el).find('input'));
-	}
-
 	// ---------------------------------------------------------------------
     //public api
     return {
@@ -149,8 +129,8 @@
     	resetNewPostsBadge: function(increment) { resetNewPostsBadge(increment); },
     	updateTitle: function(n) { updateTitle(n); },
     	linkify: function(text) { return linkify(text); },
-    	timeSince: function(timestamp) { return timeSince(timestamp); },
-    	showTaggingSystem: function(node, tagarray) { showTaggingSystem(node, tagarray); }
+    	timeSince: function(timestamp) { return timeSince(timestamp); }
+    	/*showTaggingSystem: function(node, tagarray) { showTaggingSystem(node, tagarray); }*/
     };
 
 })($);
