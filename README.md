@@ -18,7 +18,7 @@ Yet another bookmarks tool, but this one totally egoistic. Only fullfilling my o
 
 Current version is a one-site-one-smarks version, meaning that you only have one public stream. 
 
-See the wiki for a small (idea)roadmap.
+Roadmap/ideamap [here](https://github.com/nada/smarks/wiki).
 
 ## Dependencies
 
