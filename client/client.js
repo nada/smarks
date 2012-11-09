@@ -235,10 +235,11 @@ Template.post.events(sJS.okCancelEvents(
 	'#new-tag',
 	{
 	  ok: function (newTag, evt) {
+	  	var newTags = _.map(newTag.split(','), function(tag){ return $.trim(tag); });
 	  	var tags = this.tags || [];
 	  	var res = UserTags.findOne({postId:this._id, owner:Meteor.userId()}) || {};
 	  	var userTags = res.addedtags || [];
-	  	var alltags = _.union(tags, userTags, newTag);
+	  	var alltags = _.union(tags, userTags, newTags);
 	  	var addedtags = _.difference(alltags, tags);
 	  	
 	  	//not ideal but mongo's upsert option is missing in meteor at the moment

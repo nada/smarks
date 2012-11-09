@@ -95,7 +95,7 @@
       {{#if taggingThis}}
       <div id="taggingSystem">
         <a href="#" class="icon-remove"></a>
-        <input id="new-tag" type="text" data-provide="typeahead" data-source='{{alltags}}' placeholder="add a tag"/>
+        <input id="new-tag" type="text" data-provide="typeahead" data-source='{{alltags}}' placeholder="add tags, comma-separated"/>
         {{#if hasTags}}{{#each tags}}
         <button class="tag-remove btn btn-mini" type="button" value="{{this}}"><i class="icon-remove"></i> {{this}}</button>
         {{/each}}{{/if}}
