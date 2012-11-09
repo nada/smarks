@@ -269,7 +269,10 @@ Template.post.events(sJS.okCancelEvents(
 	  },
 	  cancel: function(evt) {
 	  	//out on escape
-	  	if(evt.keyCode === 27) Session.set('taggingPost', null);
+	  	if(evt.keyCode === 27) {
+	  		$(evt.target).blur();
+	  		Session.set('taggingPost', null);
+	  	}
 	  }
 	  
 	})
