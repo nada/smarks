@@ -26,7 +26,7 @@ smarks! needs a custom version of bootstrap including [fontawesome](http://forta
 
 To get the package, clone it at: 
 
-	git clone git://github.com/nada/meteor-package-bootstrap-with-fontawesome.git
+	git clone git://github.com/nada/meteor-package-bootstrap-with-fontawesome.git bootstrap-with-fontawesome
 
 Then you have to copy it into the package direcory of your meteor install. For me this is at ```/usr/local/meteor/packages```
 
