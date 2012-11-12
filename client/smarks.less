@@ -97,8 +97,8 @@ a:hover{
     margin-bottom: 10px;
     width: @boxWidth;
     position:absolute;
-    font-family: Georgia;
-    font-size:14px;
+    /*font-family: Georgia;*/
+    font-size:13px;
     
     /*
     -webkit-transition: all 0.3s ease-out;  
@@ -125,16 +125,25 @@ a:hover{
 
 .box .inner {
     cursor: pointer;
-    padding: @boxPadding;
+    padding: (@boxPadding - 4) @boxPadding @boxPadding @boxPadding;
     width: (@boxWidth - 2 * @boxPadding);
     color: #000000;
-    font-size: 14px;
-    line-height: 135%;
+    line-height: 115%;
 }
 
 .box .inner a {
     word-wrap: break-word;
     overflow-wrap:break-word;
+    display:inline;
+}
+
+.box .inner .smark .title
+{
+    display:block;
+    font-family: Georgia;
+    font-size:15px;
+    line-height: 125%;
+    margin-bottom:4px;
 }
 
 .box .embedly
@@ -295,7 +304,7 @@ ul.typeahead {
     display: block;
     width: @tagsysBoxWidth - 2*@tagsysPadding - 16;
     position:absolute;
-    font-family: Georgia;
+    font-family: Helvetica,Arial,sans-serif;
     font-size:11px;
 
     -webkit-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.35);

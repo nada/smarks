@@ -367,49 +367,63 @@ Template.page.events(sJS.okCancelEvents(
 
 //on init page load, this runs 2 times, can't figure out why...
 Template.page.rendered = function () {
-	//go through every post and linkify and ebedly it
-	$('.smark .inner').not('.linkified').each(function(){
-		var res = sJS.linkify($(this).text());
-		$(this).find('span.smark').html(res.text);
-		if(res.urls != null)
-		{
-			var node = $(this).find('div.embedly');
-			$.embedly(res.urls, {
-					key:'f8fe34981bf2459e850c443dd1e587b7',
-					maxWidth: '260px', 
-					maxHeight: '260px',
-					success: function(oembed, dict){
-	   					switch(oembed.type)
-						{
-							case "photo":
-								$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a>');
-								break;
-							case "link":
 
-								if(oembed.thumbnail_url) {
-									$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a>'); 	
-								}
-								break;
-							case "video":
-							case "rich":
-								$(node).attr("style", "width:"+oembed.width+"px;height:"+oembed.height+"px;");
-								$(node).html(oembed.html);
-								break;
-							default:
-								break;
+	//only do this when the user is loaded
+	if(Meteor.userLoaded())
+	{
+		//go through every post and linkify and ebedly it
+		$('.smark .inner').not('.linkified').each(function(){
+			var res = sJS.linkify($(this).text());
+			$(this).find('span.smark').html(res.text);
+			if(res.urls != null)
+			{
+				var node = $(this).find('div.embedly');
+				$.embedly(res.urls, {
+						key:'f8fe34981bf2459e850c443dd1e587b7',
+						maxWidth: '260px', 
+						maxHeight: '260px',
+						success: function(oembed, dict){
+							//console.log(oembed, dict);
+		   					switch(oembed.type)
+							{
+								case "photo":
+									$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.url + '" width="'+oembed.width+'" height="'+oembed.height+'"/></a>');
+									break;
+								case "link":
+									if(oembed.title) {
+										$(node).prev().prepend('<span class="title">'+oembed.title+'</span>');
+										//console.log($(node).prev().prepend('xxx'));
+									}
+									if(oembed.thumbnail_url) {
+										$(node).html('<a href="' + oembed.url + '" target="_blank"><img src="' + oembed.thumbnail_url + '" width="'+oembed.thumbnail_width+'" height="'+oembed.thumbnail_height+'"/></a>'); 	
+									}
+									break;
+								case "video":
+								case "rich":
+									$(node).attr("style", "width:"+oembed.width+"px;height:"+oembed.height+"px;");
+									$(node).html(oembed.html);
+									break;
+								default:
+									break;
+							}
+							$(node).removeClass("empty");
+							sJS.repositionPosts();  				
+						},
+						error:function(node, dict) {
+							//do nothing than logging for the moment
+							console.log("an error occured> node/dict :", node, dict);
+							sJS.repositionPosts();
 						}
-						$(node).removeClass("empty");
-						sJS.repositionPosts();  				
-					},
-					error:function(node, dict) {
-						//do nothing than logging for the moment
-						console.log("an error occured> node/dict :", node, dict);
 					}
-				}
-			);
-		}
-  	}).addClass("linkified");
-  	sJS.repositionPosts();
+				);
+			}
+	  	}).addClass("linkified");
+	  	sJS.repositionPosts();
+	}
+	else
+	{
+		sJS.repositionPosts();
+	}
 };
 
 
