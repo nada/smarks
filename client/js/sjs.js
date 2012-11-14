@@ -120,6 +120,54 @@
 	    return str;
 	};
 
+	getEmbedly = function(smarktext, _id)
+	{
+		var res = linkify(smarktext);
+		if(res.urls !== null)
+		{
+			console.log("trying to get embedly for ", smarktext, _id);
+			urls = res.urls.join(",");
+			Meteor.http.get('http://api.embed.ly/1/oembed?urls=' + urls,
+				{
+					params: {
+						"key":"f8fe34981bf2459e850c443dd1e587b7",
+						"maxWidth": "260px", 
+						"maxHeight": "260px"
+					}
+				},
+				function(error, result)
+				{
+					if(error === null)
+					{
+						var embedly = [];
+						var json = $.parseJSON(result.content);
+						for(i in json)
+						{
+							var o = {};
+							o.title = json[i].title;
+							o.url = json[i].url;
+							o.thumb = {
+								url:json[i].thumbnail_url,
+								width:json[i].thumbnail_width,
+								height:json[i].thumbnail_height
+							}
+							embedly.push(o);
+						}
+						//write to smark
+						
+						Smarks.update(
+							{
+				  				_id:_id,
+							}, {
+					  			$set:{embedly:embedly}
+					  		}
+					  	);
+					}
+				}
+			);
+		}
+	}
+
 	// ---------------------------------------------------------------------
     //public api
     return {
@@ -129,7 +177,8 @@
     	resetNewPostsBadge: function(increment) { resetNewPostsBadge(increment); },
     	updateTitle: function(n) { updateTitle(n); },
     	linkify: function(text) { return linkify(text); },
-    	timeSince: function(timestamp) { return timeSince(timestamp); }
+    	timeSince: function(timestamp) { return timeSince(timestamp); },
+    	getEmbedly: function(smarktext, _id) { getEmbedly(smarktext, _id); }
     	/*showTaggingSystem: function(node, tagarray) { showTaggingSystem(node, tagarray); }*/
     };
 
