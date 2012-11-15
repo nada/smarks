@@ -131,8 +131,8 @@
 				{
 					params: {
 						"key":"f8fe34981bf2459e850c443dd1e587b7",
-						"maxWidth": "260px", 
-						"maxHeight": "260px"
+						"maxwidth": "260", 
+						"maxheight": "260"
 					}
 				},
 				function(error, result)
