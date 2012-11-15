@@ -299,12 +299,17 @@ Template.post.helpers({
 Template.post.rendered = function(){
 	//activate input if tagging
 	var smarkdata = this.data;
+	var smarknode = $(this.firstNode).find('span.smark');
+	//linkify
+	$(smarknode).html(sJS.linkify($(smarknode).text()).text);
+
 	if(!Session.equals('taggingPost', null)) sJS.activateInput($('#new-tag'));
 	else
 	{
 		if(this.find('div.embedly') === null)
 			sJS.getEmbedly(this.data.smark, this.data._id);
 	}
+	sJS.repositionPosts();
 };
 
 // PAGE _________________________________________________
