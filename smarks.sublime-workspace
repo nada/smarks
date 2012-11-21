@@ -4,8 +4,72 @@
 		"selected_items":
 		[
 			[
+				"find",
+				"firstNode"
+			],
+			[
+				"get",
+				"getEmbedly"
+			],
+			[
+				"di",
+				"difference"
+			],
+			[
+				"all",
+				"alltagsString"
+			],
+			[
+				"allta",
+				"alltagsStr"
+			],
+			[
+				"show",
+				"showTaggingSystem"
+			],
+			[
+				"par",
+				"parent"
+			],
+			[
 				"user",
 				"userId"
+			],
+			[
+				"erro",
+				"errorThrown"
+			],
+			[
+				"jq",
+				"jqXHR"
+			],
+			[
+				"curre",
+				"currentNewsState"
+			],
+			[
+				"tag",
+				"tag_filters"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"Box",
+				"BOX_OFFSET"
+			],
+			[
+				"B",
+				"BOX_WIDTH"
+			],
+			[
+				"Bo",
+				"BOX_OFFSET"
+			],
+			[
+				"repo",
+				"repositionPosts"
 			],
 			[
 				"new",
@@ -51,7 +115,7 @@
 			"file": "client/client.js",
 			"settings":
 			{
-				"buffer_size": 6733,
+				"buffer_size": 9812,
 				"line_ending": "Unix"
 			}
 		},
@@ -59,7 +123,7 @@
 			"file": "client/smarks.less",
 			"settings":
 			{
-				"buffer_size": 2298,
+				"buffer_size": 7587,
 				"line_ending": "Unix"
 			}
 		},
@@ -67,27 +131,39 @@
 			"file": "client/smarks.html",
 			"settings":
 			{
-				"buffer_size": 1793,
+				"buffer_size": 3845,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/js/sjs.js",
+			"settings":
+			{
+				"buffer_size": 5123,
 				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Processing/Processing.sublime-build",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 327.0,
 		"selected_items":
 		[
 			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
 				"",
-				"Package Control: Install Package"
+				"Package Control: List Packages"
 			],
 			[
 				"console",
 				"Set Syntax: R Console"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -104,12 +180,35 @@
 	},
 	"file_history":
 	[
-		"/Users/nada/dev/meteor/smarks/README.md",
-		"/Users/nada/dev/meteor/smarks/client/smarks.html",
-		"/Users/nada/dev/meteor/smarks/models.js",
+		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.infinitescroll.min.js",
+		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.ba-dotimeout.min.js",
+		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.ba-dotimeout.js",
+		"/Users/nada/dev/meteor/smarks/client/js/pax_scroll.js",
+		"/Users/nada/dev/meteor/smarks/client/js/router.js",
 		"/Users/nada/dev/meteor/smarks/server/server.js",
-		"/Users/nada/dev/meteor/smarks/client/smarks.js",
+		"/Users/nada/dev/meteor/smarks/client/js/ga.js",
+		"/Users/nada/dev/meteor/smarks/server/models.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.html",
 		"/Users/nada/dev/meteor/smarks/client/smarks.less",
+		"/Users/nada/dev/meteor/smarks/client/client.js",
+		"/Users/nada/dev/meteor/smarks/client/js/sjs.js",
+		"/Users/nada/Desktop/test.pde",
+		"/Users/nada/dev/meteor/todos/client/todos.js",
+		"/Users/nada/css/font-awesome.css",
+		"/Users/nada/dev/meteor/smarks/smarks.sublime-project",
+		"/Users/nada/dev/meteor/smarks/README.md",
+		"/usr/local/meteor/packages/madewith/madewith_badge.css",
+		"/usr/local/meteor/packages/madewith/madewith.css",
+		"/Users/nada/dev/meteor/smarks/client/sjs/sjs.js",
+		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.embedly.js",
+		"/Users/nada/dev/meteor/smarks/client/sjs/router.js",
+		"/Users/nada/dev/meteor/todos/client/todos.html",
+		"/Users/nada/dev/meteor/smarks/models.js",
+		"/Users/nada/dev/meteor/smarks/client/sjs/sJS.js",
+		"/Users/nada/dev/meteor/todos/server/publish.js",
+		"/Users/nada/dev/meteor/todos/client/todos.css",
+		"/Users/nada/dev/meteor/todos/server/bootstrap.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.js",
 		"/Users/nada/dev/meteor/smarks/client/variables.less",
 		"/Users/nada/dev/meteor/smarks/client/smarks.css",
 		"/Users/nada/dev/meteor/smarks/smarks.html",
@@ -126,13 +225,14 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 96.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -140,6 +240,90 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Smarks.",
+			"timeline",
+			"smark",
+			"tagfilter",
+			"console.log",
+			"has",
+			"getEmbedly",
+			"update",
+			"smark",
+			"gorgia",
+			"font",
+			"z-index",
+			"console",
+			"return true",
+			"@tag",
+			"value",
+			"color",
+			"icon-",
+			"update",
+			"console.log",
+			".update",
+			"insert",
+			".smark",
+			"smark",
+			"\");\n",
+			"rendered",
+			"tags",
+			"owner",
+			"okcan",
+			"else",
+			"tag_filters",
+			"tag",
+			"();\n",
+			"focus",
+			";\n",
+			"console.log",
+			"find",
+			"tagDo",
+			"tag",
+			")) ",
+			"boxWidth",
+			"okCancelEvents",
+			"rendered",
+			"butt",
+			"btn",
+			"Router",
+			"avatar",
+			"tag_filter",
+			"tag_filters",
+			"session",
+			"heart",
+			"timeSince",
+			"posts",
+			"console",
+			"heart",
+			"999999",
+			"tag_filters",
+			"tags",
+			"968249",
+			"favou",
+			"util",
+			"\";\n",
+			"error",
+			".tags",
+			"console.log",
+			"insert",
+			"tag",
+			"find",
+			"tag_filter",
+			"navigate",
+			"router",
+			"trigger",
+			"console.log",
+			"Session",
+			"fav",
+			"btn",
+			"rout",
+			"Backbone",
+			"avatar",
+			"tag_filter",
+			");\n",
+			"activateInput",
+			"coutn",
+			"fav-only",
 			"collection",
 			"favs",
 			"currentUser",
@@ -162,7 +346,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -170,25 +354,24 @@
 					"file": "client/client.js",
 					"settings":
 					{
-						"buffer_size": 6733,
+						"buffer_size": 9812,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5823,
-								5823
+								1596,
+								1596
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 666.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -198,15 +381,15 @@
 					"file": "client/smarks.less",
 					"settings":
 					{
-						"buffer_size": 2298,
+						"buffer_size": 7587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1820,
-								1820
+								1210,
+								1210
 							]
 						],
 						"settings":
@@ -226,15 +409,15 @@
 					"file": "client/smarks.html",
 					"settings":
 					{
-						"buffer_size": 1793,
+						"buffer_size": 3845,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								1208,
+								1208
 							]
 						],
 						"settings":
@@ -244,7 +427,34 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 331.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "client/js/sjs.js",
+					"settings":
+					{
+						"buffer_size": 5123,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1974,
+								1974
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 223.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -283,6 +493,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"replace":
 	{
 		"height": 0.0
@@ -293,6 +507,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"smarks.less",
+				"smarks/client/smarks.less"
+			],
 			[
 				"html",
 				"<doctype html>"
@@ -308,10 +526,10 @@
 		],
 		"width": 0.0
 	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 227.0,
+	"side_bar_width": 254.0,
 	"status_bar_visible": true
 }

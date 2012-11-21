@@ -1,0 +1,50 @@
+<template name="view_cl">
+    
+    <div class="row-fluid">
+      <div class="span1"></div>
+      <div class="span10 timeline">
+        {{> timeline }}
+      </div>
+    </div>
+
+</template>
+
+<template name="timeline">
+    {{#each posts}}{{> post}}{{/each}}
+</template>
+
+<template name="post">
+  <div class="box smark" data-id="{{_id}}">
+   <div class="inner">
+      <span class="title">{{firstEmbedlyTitle}}</span>
+      <span class="smark">{{smark}}</span>
+      {{#each embedly}}{{> embedly}}{{/each}}
+    </div>
+    {{#if currentUser}}
+      <div class="info">
+        <div class="info-more clearfix">
+          <span class="avatar-time"><a href="#" class="avatar">{{ avatar }}</a>, {{ timeSince timestamp }}</span>
+          <span class="remove">{{#if isOwner}}<i class="icon-remove"></i>{{/if}}</span>
+        </div>
+        {{#each tags}}<a href="#" class="tag">{{ this }}</a>{{/each}}
+        <i class="icon-tags"></i>
+        {{ totalhearts }}<i class="icon-heart"></i>
+      </div>
+
+      {{#if taggingThis}}
+      <div id="taggingSystem">
+        <a href="#" class="icon-remove"></a>
+        <input id="new-tag" type="text" data-provide="typeahead" data-source='{{alltags}}' placeholder="add tags, comma-separated"/>
+        {{#each tags}}<button class="tag-remove btn btn-mini" type="button" value="{{this}}"><i class="icon-remove"></i> {{this}}</button>{{/each}}
+      </div>
+      {{/if}}
+
+    {{/if}}
+  </div>
+  
+</template>
+
+<template name="embedly">
+  <div class="embedly"><a href="{{this.url}}" target="_blank"><img src="{{this.thumb.url}}" width="{{this.thumb.width}}" height="{{this.thumb.height}}"/></a></div>
+</template>
+
