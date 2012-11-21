@@ -28,8 +28,7 @@ if (typeof Handlebars !== 'undefined') {
   Handlebars.registerHelper('renderPage', function(name) {
 
     if (! _.isString(name))
-      name = Session.get('layout');
-      console.log("template name is ", name);
+      name = Session.get('layout') || "view_cl";
     
     if (Template[name])
       return new Handlebars.SafeString(Template[name]());
