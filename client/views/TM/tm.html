@@ -1,0 +1,29 @@
+<template name="view_tm">
+	<div class="row-fluid">
+		<div class="span1"></div>
+		<div class="span10 dayline">
+			{{> dayline }}
+		</div>
+	</div>
+</template>
+
+<template name="dayline">
+	<div class="accordion" id="smarkdayaccordion">
+		{{#each days}}{{> day}}{{/each}}
+	</div>
+</template>
+
+<template name="day">
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#smarkdayaccordion" href="#collapse{{counter}}">{{daystring}}</a>
+		</div>
+		<div id="collapse{{counter}}" class="accordion-body collapse{{isCollapsed}}">
+			{{#each daycollection}}
+			<div class="accordion-inner">
+				<a href="{{daylink}}" target="_blank">{{dayentry}}</a>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</template>

@@ -1,0 +1,89 @@
+<head>
+  <title>smarks!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://scripts.embed.ly/jquery.embedly.min.js"></script>
+  <link rel="icon" href="/favicon.png" type="image/png"/>
+</head>
+
+<body>
+  <div class="container-fluid page">
+    {{> header}}
+
+    {{> newsmark}}
+
+    {{> timeline_header}}
+
+    {{renderPage}}
+
+    <div class="footer-row">
+        <span><a href="http://flashpogo.com" target="_blank">smarks!</a> /<em>(0.6.3)</em></span>
+        <span><a href="https://github.com/nada/smarks" target="_blank">your own smarks? <i class="icon-github"></i></a></span>
+      </div>
+    </div>
+
+    <div class="beta-ribbon">
+      <span class="vert-flag">beta</span>
+    </div>
+    {{> news}}
+
+  </div>
+</body>
+
+<template name="header">
+	<div class="row-fluid">
+      <div class="span10"></div>
+      <div class="span1">
+        <!--
+        <div class="btn-group layout-toggler" data-toggle="buttons-radio">
+          <button type="button" class="btn btn-mini{{isLayoutActive 'view_cl'}}" value="view_cl">CL</button>
+          <button type="button" class="btn btn-mini{{isLayoutActive 'view_tm'}}" value="view_tm">TM</button>
+        </div>
+      -->
+      </div>
+      <div class="span1">
+        <div class="loginButtons clearfix">{{loginButtons align="right"}}</div>
+      </div>
+    </div>
+</template>
+
+<template name="newsmark">
+
+  <div class="row-fluid smark-input-row">
+      <div class="span1"></div>
+      <div class="span5">
+        {{#if currentUser}}
+        <textarea id="new-smark" placeholder="smark me link / add tags with hashes!"></textarea>
+        {{else}}
+        Your are definitely not logged in at all!
+        {{/if}}
+      </div>
+    </div>
+
+</template>
+
+<template name="timeline_header">
+  <div class="row-fluid">
+      <div class="span1"></div>
+      <div class="span10 timeline-header">
+        {{#if currentUser}}
+          {{#each tagFilters}}<button class="tagfilter btn btn-small" type="button"><i class="icon-remove"></i> {{this}}</button>{{/each}}
+          <button class="fav-only btn btn-small" type="button"><i class="icon-heart"></i> only</button>
+        {{/if}}
+      </div>
+    </div>
+</template>
+
+<template name="news">
+  {{#if showNews}}
+  <div class="alert alert-info" style="position:absolute;top:30px;width:50%;left:25%;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+      <br/><h4>smarks! updated</h4><br/>
+      introducing some sort of tagging system. try it and give feedback to make it better!<br/><br/>
+  </div>
+  {{/if}}
+</template>
+ 
+
+
+
+

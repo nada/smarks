@@ -6,6 +6,15 @@
 		},
 		{
 			"path": "/Users/nada/dev/meteor/todos"
+		},
+		{
+			"path": "/Users/nada/dev/js/lib/embedly-jquery"
+		},
+		{
+			"path": "/usr/local/meteor/packages/madewith"
+		},
+		{
+			"path": "/usr/local/meteor/packages/bootstrap"
 		}
 	]
 }
