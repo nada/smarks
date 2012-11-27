@@ -19,6 +19,7 @@ Template.timeline.rendered = function() {
 	for(var d in favDocs) {
 		$('.box.smark[data-id='+favDocs[d].postId+']').addClass("favourite");
 	}
+	sJS.repositionPosts();
 };
 
 // POST _________________________________________________
