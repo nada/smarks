@@ -19,7 +19,7 @@ Template.timeline.rendered = function() {
 	for(var d in favDocs) {
 		$('.box.smark[data-id='+favDocs[d].postId+']').addClass("favourite");
 	}
-	sJS.repositionPosts();
+	sJS.reloadIsotopeItems();
 };
 
 // POST _________________________________________________
@@ -245,6 +245,8 @@ Template.post.helpers({
 });
 
 Template.post.rendered = function(){
+
+	console.log("post " + this.data._id + " rendered");
 	//activate input if tagging
 	var smarkdata = this.data;
 	var smarknode = $(this.firstNode).find('span.smark');
@@ -257,7 +259,7 @@ Template.post.rendered = function(){
 		if(this.find('div.embedly') === null)
 			sJS.getEmbedly(this.data.smark, this.data._id);
 	}
-	sJS.repositionPosts();
+	//sJS.reloadIsotopeItems();
 };
 
 // PAGE _________________________________________________
@@ -265,10 +267,20 @@ Template.post.rendered = function(){
 
 //on init page load, this runs 2 times, can't figure out why...
 Template.view_cl.rendered = function () {
-	sJS.repositionPosts();
+
+	$('div.embedly img').load(function(){
+		$(this).css('display', 'block');
+		sJS.reLayoutIsotopeItems();
+	});
 
 	$('div.btn-group button').click(function(){
 		Session.set('layout',$(this).val());
+	});
+	//fire up isotope
+	$('.timeline').isotope({
+	  // options
+	  itemSelector : '.box.smark:visible',
+	  layoutMode : 'masonry'
 	});
 };
 

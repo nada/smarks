@@ -50,6 +50,10 @@ a:hover{
     padding:0px;
 }
 
+.page {
+    margin-bottom:40px;
+}
+
 #new-smark
 {
     width:425px;
@@ -95,11 +99,15 @@ a:hover{
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #EDEDED;
     display: block;
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     width: @boxWidth;
     position:absolute;
+    left:0px;
+    top:0px;
     /*font-family: Georgia;*/
     font-size:13px;
+    margin-right:12px;
+    margin-bottom:12px;
     
     /*
     -webkit-transition: all 0.3s ease-out;  
@@ -150,6 +158,11 @@ a:hover{
 .box .embedly
 {
 	margin:10px 0px 0px 0px;
+}
+
+.box .embedly img 
+{
+    display:none;
 }
 
 .box .embedly.empty

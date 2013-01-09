@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"today",
+				"todayStamp"
+			],
+			[
 				"find",
 				"firstNode"
 			],
@@ -112,34 +116,10 @@
 	"buffers":
 	[
 		{
-			"file": "client/client.js",
+			"file": "client/views/CL/cl.js",
 			"settings":
 			{
-				"buffer_size": 9812,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/smarks.less",
-			"settings":
-			{
-				"buffer_size": 7587,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/smarks.html",
-			"settings":
-			{
-				"buffer_size": 3845,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/js/sjs.js",
-			"settings":
-			{
-				"buffer_size": 5123,
+				"buffer_size": 6576,
 				"line_ending": "Unix"
 			}
 		}
@@ -180,18 +160,32 @@
 	},
 	"file_history":
 	[
+		"/Users/nada/dev/meteor/smarks/client/views/TM/tm.js",
+		"/Users/nada/dev/meteor/smarks/client/client.js",
+		"/Users/nada/dev/meteor/smarks/lib/sjs.js",
+		"/Users/nada/dev/meteor/smarks/.meteor/local/build/static/client/views/CL/cl.js",
+		"/Users/nada/dev/meteor/smarks/client/views/CL/cl.js",
+		"/Users/nada/dev/meteor/smarks/client/views/smarks.js",
+		"/Users/nada/dev/meteor/smarks/client/js/router.js",
+		"/Users/nada/dev/meteor/smarks/client/jquery.cookie.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.less",
+		"/Users/nada/dev/meteor/smarks/client/views/TM/tm.html",
+		"/Users/nada/dev/meteor/smarks/client/views/CL/cl.html",
+		"/Users/nada/dev/meteor/smarks/client/views/smarks.html",
+		"/Users/nada/dev/meteor/smarks/lib/dateformat.js",
+		"/Users/nada/dev/meteor/smarks/client/smarks.html",
+		"/Users/nada/dev/meteor/smarks/client/views/CL/cl-view.html",
+		"/Users/nada/dev/meteor/smarks/client/views/TM/tm-view.html",
+		"/Users/nada/dev/meteor/smarks/server/server.js",
+		"/Users/nada/dev/meteor/smarks/client/js/pax_scroll.js",
+		"/Users/nada/dev/meteor/smarks/.meteor/local/build/static/client/client.js",
+		"/Users/nada/dev/meteor/smarks/client/views/TM/™-view.html",
+		"/Users/nada/dev/meteor/smarks/client/js/sjs.js",
 		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.infinitescroll.min.js",
 		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.ba-dotimeout.min.js",
 		"/Users/nada/dev/meteor/smarks/client/plugins/jquery.ba-dotimeout.js",
-		"/Users/nada/dev/meteor/smarks/client/js/pax_scroll.js",
-		"/Users/nada/dev/meteor/smarks/client/js/router.js",
-		"/Users/nada/dev/meteor/smarks/server/server.js",
 		"/Users/nada/dev/meteor/smarks/client/js/ga.js",
 		"/Users/nada/dev/meteor/smarks/server/models.js",
-		"/Users/nada/dev/meteor/smarks/client/smarks.html",
-		"/Users/nada/dev/meteor/smarks/client/smarks.less",
-		"/Users/nada/dev/meteor/smarks/client/client.js",
-		"/Users/nada/dev/meteor/smarks/client/js/sjs.js",
 		"/Users/nada/Desktop/test.pde",
 		"/Users/nada/dev/meteor/todos/client/todos.js",
 		"/Users/nada/css/font-awesome.css",
@@ -240,6 +234,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"updateTitle",
+			"currentuser",
+			"user",
+			"rendered",
+			"repositionPosts",
+			"template name is",
+			"layout",
+			"timeline",
+			"each",
+			"currentNewsState",
+			"layout",
+			"alltags",
+			"Template.page",
+			"-view",
+			"userloaded",
+			"console.log(",
+			"smarks",
 			"Smarks.",
 			"timeline",
 			"smark",
@@ -336,6 +347,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Template.view_cl"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -351,110 +363,26 @@
 			[
 				{
 					"buffer": 0,
-					"file": "client/client.js",
+					"file": "client/views/CL/cl.js",
 					"settings":
 					{
-						"buffer_size": 9812,
+						"buffer_size": 6576,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1596,
-								1596
+								733,
+								734
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 666.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "client/smarks.less",
-					"settings":
-					{
-						"buffer_size": 7587,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1210,
-								1210
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "client/smarks.html",
-					"settings":
-					{
-						"buffer_size": 3845,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1208,
-								1208
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 331.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "client/js/sjs.js",
-					"settings":
-					{
-						"buffer_size": 5123,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1974,
-								1974
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 223.0,
+						"translation.y": 41.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -499,7 +427,7 @@
 	},
 	"replace":
 	{
-		"height": 0.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":

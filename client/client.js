@@ -25,8 +25,6 @@ Accounts.ui.config({
 // _________________________________________________________________________
 
 Meteor.startup(function () {
-	$(window).resize(sJS.repositionPosts);
-
 	Backbone.history.start({pushState: true});
 
 	if (SuperU.find().count() === 0) {

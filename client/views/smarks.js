@@ -69,13 +69,13 @@ Template.timeline_header.events({
 		if($(evt.target).hasClass('btn-primary')) {
 			$(evt.target).removeClass('btn-primary');
 			$('.box.smark').fadeIn(function(){
-				repositionPosts();
+				sJS.reLayoutIsotopeItems();
 			});
 		}
 		else {
 			$(evt.target).addClass('btn-primary');
 			$('.box.smark').not('.favourite').fadeOut(function(){
-				repositionPosts();
+				sJS.reLayoutIsotopeItems();
 			});
 		}
 	}	
