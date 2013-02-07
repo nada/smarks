@@ -1,0 +1,3 @@
+var Config = {
+  embedlyAPIKey: "YOUR_API_KEY_HERE"
+};
